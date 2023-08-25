@@ -1,0 +1,97 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@font-face {
+  font-family: 'Avant';
+  src: url('../FONTS/AvantGarde-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Glacial';
+  src: url('../FONTS/GlacialIndifference-Bold.woff');
+}
+
+@font-face {
+  font-family: 'GlacialR';
+  src: url('../FONTS/GlacialIndifference-Regular.woff');
+}
+
+#dados {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.data {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+}
+
+.data > b {
+  font-family: "GlacialR", Sans-Serif;
+  font-size: 1.3em;
+  margin-bottom: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.content b {
+  font-family: "GlacialR";
+  font-weight: normal;
+  margin-bottom: 20px;
+  width: 200px;
+}
+
+.content i {
+  font-style: normal;
+  font-family: "Aleo", Sans-Serif;
+  margin-left: 10px;
+}
+
+#ccv {
+  display: flex;
+  padding: 15px;
+  background: #000;
+  margin-top: 20px;
+  color: #fff;
+  border-radius: 4px;
+}
+
+#ccif {
+  display: flex;
+  padding: 7px;
+  background: #DC143C;
+  margin-top: 20px;
+  color: #fff;
+  border-radius: 4px;
+}
+
+#ccp {
+  display: flex;
+  padding: 7px;
+  background: #A9A9A9;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+#ccpsp {
+  display: flex;
+  padding: 7px;
+  background: #1E90FF;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+
+/*----------------------*/
+

@@ -1,0 +1,526 @@
+body {
+  margin: 0;
+  background: #fff;
+}
+
+*{
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: 'Avant';
+  src: url('../FONTS/AvantGarde-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Glacial';
+  src: url('../FONTS/GlacialIndifference-Bold.woff');
+}
+
+@font-face {
+  font-family: 'GlacialR';
+  src: url('../FONTS/GlacialIndifference-Regular.woff');
+}
+
+#conteudocd {
+  width: 100%;
+}
+
+h2{
+  font-family: "GlacialR", sans-serif;
+  text-align: left;
+  font-size: 1.5em;
+  color: #000;
+  margin-bottom: 40px;
+}
+
+#conteudocd > p {
+  font-family: "GlacialR", sans-serif;
+  margin-bottom: 30px;
+  font-size: 1.3em;
+}
+
+.space-conteudo{
+  box-sizing: border-box;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.box-logo{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 70px;
+}
+
+.box-logo button {
+  background: none;
+  border: none;
+}
+
+.box-logo button img {
+  width: 25px;
+} 
+
+.logo {
+  width: 45px;
+  height: 45px;
+  margin-left: calc(50% - 65px);
+}
+
+.ddpessoal p {
+  font-family: "Glacial", sans-serif;
+  margin: 0;
+  margin-bottom: 7px;
+  font-size: 1.1em;
+}
+
+.ddpessoal input {
+  box-sizing: border-box;
+  padding-left: 10px;
+  margin-bottom: 25px;
+  background: #fff;
+  width: 100%;
+  height: 50px;
+  outline: none;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  font-family: "GlacialR", sans-serif;
+  font-size: 1.2em;
+}
+
+.ddpessoal input:hover{
+  height: 50px;
+  transition: all 0.2s;
+}
+
+.ddpessoal button {
+  width: 100%;
+  height: 50px;
+  font-family: "Titillium Web", sans-serif;
+  color: #fff;
+  background: blue;
+  border: none;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+#senha form{
+  background-color: #000;
+  color: white;
+  border-radius: 5px;
+}
+
+#senha form label{
+  font-size: 1.2em;
+  font-family: "Titillium Web", sans-serif;
+  margin-left: 10px;
+}
+
+#senha form input{
+  width: 320px;
+  box-sizing: border-box;
+  padding: 10px 0;
+  height: 30px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+#senha form p {
+  padding-top: 15px;
+}
+
+#senha > p {
+  font-family: "Glacial", sans-serif;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+#bt {
+  display: flex;
+  justify-content: center;
+}
+
+#bt-avant:hover {
+  background: #000080;
+  transform: scale(0.9);
+  transition: all 0.2s;
+}
+
+.sgt {
+  margin-top: 10px;
+  display: none;
+  animation: aparecer 1s 1;
+  position: relative;
+}
+
+.sgt i {
+  font-style: normal;
+  font-family: "GlacialR", sans-serif;
+  font-size: 1.2em;
+  margin-top: 20px;
+}
+
+.sgt i u {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.ug {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.ug button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  border: solid 1px #000;
+  color: #fff;
+  font-family: "GlacialR", Sans-Serif;
+  width: 50%;
+}
+
+.ug button:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: solid 1px #000;
+  color: #000;
+  font-family: "GlacialR", Sans-Serif;
+  width: 40%;
+}
+
+.ug button img {
+  width: 18px;
+  margin-right: 10px;
+}
+
+.btll {
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 30px;
+  background: #000;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.1em;
+  border: none;
+  color:#fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.sgt2 {
+  margin-top: 10px;
+  display: none;
+  animation: aparecer 1s 1;
+  position: relative;
+}
+
+.sgt2 i {
+  font-style: normal;
+  font-family: "GlacialR", sans-serif;
+  font-size: 1.2em;
+  margin-top: 20px;
+}
+
+.aberta{
+  display: block;
+}
+
+.aberta2{
+  display: block;
+}
+
+@keyframes aparecer{
+  0% {
+    opacity: 0;
+    right: -500px;
+  }
+  100% {
+    opacity: 1;
+    right: 0px;
+  }
+}
+
+#btl {
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 30px;
+  background: #000;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.1em;
+  border: none;
+  color:#fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.ddpessoal a :nth-child(2){
+  text-align: center;
+  font-family: "GlacialR", sans-serif;
+  font-size: 2.0em;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  font-family: "GlacialR", sans-serif;
+  font-size: 1.2em;
+  margin-bottom: 50px;
+}
+
+.center a{
+  color: #004ad4;
+  text-decoration: none;
+}
+
+#linha {
+  background: black;
+  width: 100%;
+  height: 2px;
+  margin-bottom: 20px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.title b {
+  font-family: "Avant", Sans-Serif;
+  font-size: 1.8em;
+}
+
+#line {
+  background: black;
+  width: 2px;
+  height: 30px;
+  margin: 0px 12px;
+  border-radius: 30px;
+}
+
+.logo2 {
+  width: 130px;
+}
+
+#log {
+  max-width: 350px;
+  font-family: "Avant", Sans-Serif;
+  padding: 0 20px;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.line {
+  width: auto;
+  height: 3px;
+  border-radius: 50px;
+  background: rgb(156, 156, 156);
+  margin-bottom: 20px;
+  margin-bottom: 80px;
+}
+
+@keyframes slide {
+  0% {
+    opacity: 0;
+    right: -500px;
+  }
+  100% {
+    opacity: 1;
+    right: 0;
+  }
+}
+
+.slide {
+  height: 100%;
+  width: 100%;
+  padding-top: 30px;
+  background: #fff;
+  opacity: 0;
+  right: -500px;
+  animation-name: slide;
+  animation-iteration-count: 1;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  position: relative;
+}
+
+#bt-log {
+    width: 100%;
+  height: 50px;
+  font-family: "Titillium Web", sans-serif;
+  color: #fff;
+  background: blue;
+  border: none;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+#bt-log:hover {
+  background: #000080;
+  transform: scale(0.9);
+  transition: all 0.2s;
+}
+
+@keyframes slide-2 {
+  0% {
+    opacity: 0;
+    top: -500px;
+  }
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+.slide-2 {
+  height: 100%;
+  width: 100%;
+  padding-top: 20px;
+  background: #fff;
+  opacity: 0;
+  top: -500px;
+  animation-name: slide-2;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  position: absolute;
+}
+
+.left {
+  display: flex;
+  justify-content: center;
+  width: 350px;
+}
+
+.msg {
+  text-decoration: none;
+  font-style: normal;
+  text-align: center;
+  font-family: "GlacialR", sans-serif;
+  font-size: 1.2em;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.msg a {
+  color: blue;
+  text-decoration: none;
+}
+
+#cad {
+  width: 100%;
+  height: 50px;
+  font-family: "Titillium Web", sans-serif;
+  color: #fff;
+  background: blue;
+  border: none;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin: 0;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+#cad:hover {
+  background: #000080;
+  transform: scale(0.9);
+  transition: all 0.2s;
+}
+
+#login {
+  width: 100%;
+  height: 50px;
+  font-family: "GlacialR", sans-serif;
+  color: #fff;
+  background: green;
+  border: none;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin: 0;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#login:hover {
+  background: #006400;
+  transform: scale(0.9);
+  transition: all 0.2s;
+}
+
+.jesus {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+}
+
+.input-group {
+ position: relative;
+}
+
+.input {
+ border: solid 1.5px #000;
+ border-radius: 1rem;
+ background: none;
+ padding: 1rem;
+ font-size: 1rem;
+ color: #000;
+ transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+}
+
+.user-label {
+  text-align: center;
+ position: absolute;
+ left: 15px;
+ color: #000;
+ transform: translateY(1rem);
+ transition: 300ms cubic-bezier(0.4,0,0.2,1);
+ font-family: "GlacialR", Sans-Serif;
+}
+
+.input:focus ~ label, input:valid ~ label {
+ transform: translateY(-50%) scale(0.9);
+ background-color: #fff;
+ padding: 0.2em;
+}
+
+.mama {
+  animation: aparecer 1s 1;
+  position: relative;
+}
+
+.mama button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  border: solid 1px #000;
+  color: #fff;
+  font-family: "GlacialR", Sans-Serif;
+  width: 100%;
+}
+
+#login img {
+  width: 20px;
+  margin-right: 10px;
+}

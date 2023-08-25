@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-conta.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <title>Conta</title>
+</head>
+<body>
+ <div class="conteudo-menu">
+<div id="menu-lateral">    
+<button id="close" onclick="opendiv()">Fechar</button>
+<div class="zx">
+  
+  <a href="introduct.html"><button >Encerrar sessão</button></a>
+  <a href="excluirconta.html"><button>Excluir conta</button></a>
+    <a href="alterarsenha.html"><button>Alterar senha</button></a>
+    <div id="xz"><a><button><img src="./ICONS/info.png">Ajuda</button></a></div>
+  
+</div>
+</div>
+  </div>
+  
+  <div class="center">
+        <div class="slide">
+          <div class="title-conta">
+            <b>Seus dados</b>
+          <button onclick="opendiv()"><img src="./ICONS/menu.png"></button>
+          </div>
+
+  <div class="dados">
+      <div class="align-h">
+          <div class="img-box">
+              <img src="./IMG/person.png">
+           <button>Alterar imagem</button>
+      </div>
+  </div>
+  
+  <div id="align-v">
+        <i>Código da conta</i>
+        <b>#12345</b>
+
+    <a href="meusrelatos.html"><button id="button-box">MEUS RELATOS<img src="./ICONS/relato.png"></button></a>
+  </div>                
+  </div>
+  </div>
+</div>
+
+<div class="center">
+    <div class="slide">
+        <div class="out-dados">
+                <div class="align-bb">
+                  <div class="align-dd">
+                      <b>E-mail</b>
+                      <i id="email">luansdp18@gmail.com </i>
+                  </div>
+                    <button onclick="redirect('alteraremail.html')"><img src="./ICONS/edit.png"></button>
+                  </div>
+                <div class="align-bb">
+                  <div class="align-dd">
+                    <b>Número</b>
+                    <i id="cel">(13)95538-1350</i>
+                  </div>
+                    <button onclick="redirect('alterarcel.html')"><img src="./ICONS/edit.png"></button>
+                </div>
+          </div>
+      </div>
+</div>
+
+<div class="nav-inferior">
+    <a href="regiao.html"><button class="icon"><img src="./ICONS/home2.png"></button></a>
+      <a href="notificacao.html"><button><img src="./ICONS/notificacao2.png"></button></a>
+       <a href=""><button><img src="./ICONS/personn.png"></button></a>
+      <a href="configuracao.html"><button><img src="./ICONS/config2.png"></button></a>
+</div>
+
+ <script src="./components/script-conta.js"></script>
+</body>
+</htlm>

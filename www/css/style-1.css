@@ -1,0 +1,162 @@
+body {
+  padding: 25px;
+  background: #fff;
+}
+
+@font-face {
+  font-family: 'Avant';
+  src: url('../FONTS/AvantGarde-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Glacial';
+  src: url('../FONTS/GlacialIndifference-Bold.woff');
+}
+
+@font-face {
+  font-family: 'GlacialR';
+  src: url('../FONTS/GlacialIndifference-Regular.woff');
+}
+
+.box-logo{
+  display: flex;
+  justify-content: center;
+}
+
+.space {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 40px;
+}
+
+h2 {
+  color: #000;
+  font-family: "GlacialR", sans-serif;
+  font-size: 2.0em;
+  margin: 0;
+  margin-top: 30%;
+}
+
+#cad {
+  width: 100%;
+  height: 50px;
+  font-family: "GlacialR", sans-serif;
+  color: #fff;
+  background: #000;
+  border: solid 1px #ccc;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.out {
+  margin-top: 30%;
+}
+
+#log {
+  width: 100%;
+  height: 50px;
+  font-family: "GlacialR", sans-serif;
+  color: #000;
+  background: #fff;
+  border: solid 1px #ccc;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.out button img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.out p {
+  text-decoration: none;
+  font-family: "GlacialR", sans-serif;
+  margin-top: 10%;
+}
+
+#log:hover {
+  transform: scale(0.9);
+  transition: all 0.2s;
+}
+
+#cad:hover {
+  transform: scale(0.9);
+  transition: all 0.2s;
+}
+
+h3 {
+  color: #fff;
+  width: 100%;
+  font-family: "Avant", sans-serif;
+  text-align: right;
+  font-size: 1.2em;
+  color: #fff;
+  text-align: left;
+  margin: 0;
+  margin-top: 40px;
+  line-height: 40px;
+}
+
+
+#ou {
+  margin: 0;
+}
+
+.line {
+  width: 40%;
+  height: 1px;
+  background: #ccc;
+  margin: auto 10px;
+}
+
+#o {
+  font-family: "GlacialR", sans-serif;
+  font-size: 1.2em;
+  color: #8a8989;
+}
+
+.align {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 20px 0 20px 0;
+}
+
+.out-2 {
+  margin-top: 50px;
+}
+
+.out-2 b {
+  text-decoration: none;
+  font-family: "GlacialR", sans-serif;
+  font-size: 1.2em;
+  font-style: normal;
+  font-weight: 100;
+}
+
+.out-2 b a {
+  text-decoration: none;
+  color: rgb(0, 64, 255);
+}
+
+
+
+
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-conta3.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <title>Alterar e-mail</title>
+</head>
+<body>
+<div class="slide"> 
+    <div class="align">
+    <div class="title-rel">
+        <div class="align">
+          <button onclick="redirect('conta.html')"><img src="./ICONS/exit_.png"></button>
+        </div>
+      </div>
+    </div>
+   
+
+  <div class="title-z">
+    <div class="title-z-1">
+        <b>Alterar e-mail</b>
+    </div>
+  </div>
+  
+
+  <div class="align">
+
+
+    <div class="pass">
+    <div class="input-group">
+      <input required="" type="password" name="Senha" autocomplete="off" class="input">
+      <label class="user-label">Digite sua senha</label>
+    </div>
+    <a href="esquecisenha.html" class="senha">Esqueci minha senha</a>
+    <div class="un">
+    <button onclick="abrir2()">Avançar</button>
+  </div>
+    </div>
+</div>
+<div class="align">
+    <div class="verification">
+      <div class="input-group">
+        <input required="" type="email" name="email" autocomplete="off" class="input" id="email">
+        <label class="user-label">Digite o novo email</label>
+      </div>
+      <div class="un"> 
+      <button onclick="abrir3()">Avançar</button>   
+    </div>
+    </div>
+   </div> 
+
+
+    <div class="end">
+      <div class="input-group">
+        <p>Enviamos um código de verificação para o email <u id="codigoVerificacao"></u>.</p>
+        <input required="" type="password" name="Senha" autocomplete="off" class="input">
+        <label class="user-label">Digite o código</label>
+      </div>
+      <div class="ug">
+        <button onclick="retur2()"><img src="./ICONS/undo.png">Anterior</button> 
+        <button style="background:blue;border:none;"onclick="redirect('regiao.html')"><img src="./ICONS/cad.png">Alterar e-mail</button> 
+      </div>
+    </div>
+    
+</div>   
+ 
+ <script src="./components/script-conta.js"></script>
+</body>
+</htlm>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <title>Cadastro</title>
+</head>
+<body>
+  <div class="slide">
+
+    <div class="jesus">
+    <div class="box-logo">
+        <button onclick="redirect('introduct.html')"><img src="./ICONS/exit_.png"></button>
+        <img src="./IMG/gryfop.png" alt="Logo Gryfo" class="logo">
+    </div>
+</div>
+
+    <div class="space-conteudo">
+        <div id="conteudocd">
+            <h2>Bem-vindo ao Gryfo!</h2>
+
+
+
+            
+           
+            <div class="ddpessoal">
+  <div class="mama">
+                <form action="control.php" method="GET"></form>
+                
+                <div class="input-group">
+  <input required="" type="text" name="nome" autocomplete="off" class="input">
+  <label class="user-label">Nome</label>
+</div>
+
+                <div class="input-group">
+  <input required="" type="number" name="cpf" autocomplete="off" class="input">
+  <label class="user-label">CPF</label>
+</div>
+
+<div class="input-group">
+  <input required="" type="number" name="cel" autocomplete="off" class="input">
+  <label class="user-label">Número de celular</label>
+</div>
+
+<div class="input-group">
+  <input required="" type="email" name="email" autocomplete="off" class="input" id="email">
+  <label class="user-label">Email</label>
+</div>
+                  
+                    
+<button onclick="abrir()">Próximo</button>
+</div>     
+                    
+                    
+<div class="sgt">
+    <i>Enviamos um código de verificação de 6 digitos para o e-mail <u id="codigoVerificacao"></u>, insira-o a baixo:</i>
+                      <br>
+                      <br>
+                      <br>
+<div class="input-group">
+  <input required="" type="number" name="cd" autocomplete="off" class="input">
+  <label class="user-label">Código de verificação</label>
+</div>
+ 
+ <div class="ug">                     
+<button onclick="retur()"><img src="./ICONS/undo.png">Anterior</button>                    
+
+  <button onclick="abrir2(this)" class="btll">Próximo</button>
+</a>
+</div>
+</div>
+                      
+                      
+                      
+                      <div class="sgt2">
+                        <i>Agora crie uma senha para a sua conta</i>
+                        <br>
+                        <br>
+                        <br>
+           <div class="input-group">
+  <input required="" type="password" name="senha" autocomplete="off" class="input">
+  <label class="user-label">Senha</label>
+</div>
+             
+           <div class="input-group">
+  <input required="" type="password" name="senha2" autocomplete="off" class="input">
+  <label class="user-label">Confirmação de senha</label>
+</div>
+                        <div class="ug">
+                          <button onclick="retur2()"><img src="./ICONS/undo.png">Anterior</button>
+                          
+       <button style="background:blue;border:none;"onclick="redirect('regiao.html')"><img src="./ICONS/cad.png">Cadastrar-se</button>
+                         </div>
+                         
+                    </div>
+                    <div class="center">
+                        
+                    </div>
+                    
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    <div class="msg">
+      <p>Já tem uma conta? <a href="login.html">Entrar</a></p>
+      </div>
+    <script src="./components/script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,199 @@
+@font-face {
+  font-family: 'Avant';
+  src: url('../FONTS/AvantGarde-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Glacial';
+  src: url('../FONTS/GlacialIndifference-Bold.woff');
+}
+
+@font-face {
+  font-family: 'GlacialR';
+  src: url('../FONTS/GlacialIndifference-Regular.woff');
+}
+
+.space {
+  margin-top: 80px;
+}
+
+#box-salvos{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.salvo {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.title-s {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.ar {
+  margin-left: auto;
+  margin-right: 10px;
+  border: none;
+  background: none;
+  padding: 0px;
+}
+
+.title-s button img {
+  width: 20px;
+}
+
+.title-s button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "GlacialR";
+}
+
+.title-s b{
+  font-family: "GlacialR";
+  font-size: 0.9em;
+}
+
+.title-s img {
+  width: 20px;
+}
+
+
+.tex {
+  display: flex;
+  align-items: flex-end;
+}
+
+.conteiner {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.conteiner b {
+  font-family: "Glacial";
+  font-size: 1.2em;
+  margin-left: 5px;
+}
+
+.title-c {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} 
+
+.title-c button {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: blue;
+  font-family: "GlacialR";
+  color: #fff;
+  border: none;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+.title-c button img {
+  width: 22px;
+}
+
+.j {
+  margin-left: 10px;
+}
+
+.alert_conteiner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 5%;
+}
+
+.alert {
+  position: absolute;
+  z-index: 9999;
+  background: #fff;
+  border-radius: 5px;
+  width: 350px;
+  padding: 10px;
+  border: 1px solid #000;
+  top: 30%;
+}
+
+.alert b {
+  font-family: "GlacialR";
+}
+
+.alert input {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  font-family: "GlacialR";
+  outline: none;
+  margin-top: 10px;
+  width: 93%;
+}
+
+.selec {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cancel {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #000;
+  font-family: "GlacialR";
+  border-radius: 3px;
+  width: 45%;
+}
+
+.cancel img {
+  width: 20px;
+  margin-right: 5px;
+}
+
+.save {
+  display: flex;
+  align-items: center;
+  background: blue;
+  color: #fff;
+  border: 1px solid #000;
+  font-family: "GlacialR";
+  border-radius: 3px;
+  width: 50%;
+  border: none;
+  padding: 10px;
+}
+
+.save img {
+  width: 20px;
+  margin-right: 5px;
+}
+
+.alert-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h3 {
+  font-family: "GlacialR", Sans-Serif;
+  font-weight: 300;
+  font-size: 0.9em;
+}

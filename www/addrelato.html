@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-rel-3.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <title>Adicionar relato</title>
+</head>
+
+<body>
+  <div class="slide">
+        <div class="center">
+          <div class="title-rel">
+            <div class="align">
+              <button onclick="redirect()"><img src="./ICONS/exit_.png"></button>
+                    <button><img src="./ICONS/info.png"></button>
+            </div>
+            <b>Adicionar relato</b>
+          </div>
+        
+          <div class="ins">
+            <i>Você fez um boletim de ocorrência para o relato que pretende descrever?</i>
+            <div class="align-2">
+            <button class="sim" onclick="exibir()">Sim</button>
+            <button class="no" onclick="exibir2()">Não</button>
+            </div>
+          </div>
+          
+          <div id="resposta">
+          </div>
+          
+          <div class="text" id="text">
+            <p id="oll">Descreva abaixo o relato:</p>
+            <div class="old">
+              <div class="ug">
+              <textarea placeholder="Escreva aqui"></textarea>
+              <button style="background:blue;border:none;"onclick="redirect('regiao.html')"><img src="./ICONS/addrel2.png">Adicionar relato</button>
+            </div>
+            </div>
+          </div>
+        </div> 
+</div>
+  <script src="./components/script-rel.js"></script>
+</body>
+</html>

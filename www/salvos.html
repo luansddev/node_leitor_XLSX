@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-menu.css">
+        <link rel="stylesheet" href="./css/style-search.css">
+        <link rel="stylesheet" href="./css/saved.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <script src="./components/script-nav.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+     <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet'/>
+    <link href="https://api.mapbox.com/search/searchbox/v1/suggest?q={search_text}">
+    <link href="https://api.mapbox.com/search/searchbox/v1/retrieve/dXJuOm1ieHJldDpDcE5oLVItdzlDb29tY3Z1NVZveWtUa0VtNlg3d2VhQmptRHZubEFiYWtQSUpsZHZqcldaOXRydDZKWXQtYzREcFZCSC1NMmxLVzFjSTdlWE9JOFE4dUp6QlVLQkJNRFYyeGtRNmJOUUZXOWo4UGJuTGpwTlIzSzR1WWZoTVI0eXNGbmRTZlZ1WWVjeGVKa3lwcHhfU09VWjlTTDlISkxRcDRVSjlKUVdYUWhfSkpaOEk5bktobUlNVDJYUUd3VFluY1N0LTZBd0dhOHB0ZWVKR3hXYUpGSzMzbkdkcS14Yllra2FVMndJUmF3UWxvM3pPX1pzRkNoczI1cDk5eVBjbFpwXzhwbWEzV0YwMVY4ZEsxX1Q5TFp5dVVLNi1fMC1keGlQbWtId0hxWV9wNUlTS19vRUo2eVo3NklmMTFlS1pvR1pwZ3pqc1lGc0l5VHRDZ00yZ3NKRzctMU5zU2gxNXk3eHJKbGxkQ25sU29Ba3NwRWhJMmtjWV96cU5xSS1FSXhNU093SnEyd01FTEJ4X0taVnpoVGtlNTFHMGJXNnVQX2t1OWxVOTFYQ2pOZkVueThrVUxKQVZoR015b3dHeVlwYzltOUp2eWg2Znp1aG1LYkRIc2RMUDRiQlNnX2djWWdTaHNNRHpxMXV5bzJRLXpWdGFXZlFDOGFBREhDWFd3cl9Xbjh1ODJ3NTFEMkhRLXZpMmtyM3BNdnFtUUJQNjJtdklWQWtTUWk1NWN1X2NfQ3ZEVGRROEFoZ1RnNU1FcmpZMWYySmNIVjFiZTNaeVAwbTBxZmhOaVVLMExNakctMkZQVjEyRDEyUHJnN0hoUUlyM3VGWjRyeVR3NUxtaEJISFp1bWhoUVIwdGloWEtEU0ZiRmtwSHBGRzR3WlI2ZGtqNVJiMFhUQ0MzNDJHTWE3WWxkV2F1Z01DcUlXODl1MTlzUTVQb3RVWEhFRnFXTkpKM1RMMk5iRXpmTWZ6LUtlSFd2WmNkU0ZlVVdYZl9teEU1VkRRcXpZU1RKZTRKVk8wSzFzQWN2Mmw4dWxUbnRlX2x5MUk4Qk8yZDNwMzJ2WGVKWDJDSzFXV3ZWR0FBVUk2MzJsMHZZYkVMeWh5cloxRXdKOWlNSmNmY2RCVy1aZGFVNGZzMHNjRUgyTXl5Z0lyX0J4QlpWSHR0QWlsT0JnSWNTWWNBUHZWMWNhNG5oT1RnYjgwanphbjhEbWJ5RXJ3Njc2WndxT1dxemJyS240U085cjJkZHhSNzJQNEJzdmZLTThSZmJwYmhiVjJUdlRGRHdiSThkb2ZYeTNCcnhGcEVMOUV3WV9iVmNUOXo2cHFjVHYzTjRRekxKM0RFQk9LamVkd1RRemE3SktqUzFyelI3b0NkaFVQQmJJWllfX1FfV2ZfRWRxcDVMaDNLRms1UUNYcFJOQ3RWR2NvMG1GYm9hTzFKalZiSFJIYy1lUXROS28tLUp4ZjctRzRySWxHOUljRVVQV3lUbUx0dDd1VlB0NERnRHdaQmRGdllxT2lLdUF1UTRsWXFnOEluNW1odTJlTmtlUUF5STBueW5vcjRPV1QtWWRtWnRDU3JBd1RoYjdRV3ktMUZmSWxvbEZyZENCdjd5V1doZ1ZYUVNiXzM0a1Njb3dOb0tOTVhDU3l1OW1lcE0wTDF2RTczTk54dGRINWVIS2RRa05lMmxRWGRsd0M4bWluVlVYR0FDV0RYczJlRndVaGZZb1V0Wnl4RHRXQlRPeW03c3FOZmpIQm9qdTIyU3hvTzlINzM4Y2IzVEJ1MGFJSEpqRzZnTDhlUlcyUU5oODFtUHhNWUZzTzExeVZmX05weFBjOUtFUmRWSmZIQ0tyMDB6M3hSUDN2cFN5aWhBaktGdkE2UUJNTXRQX3FVYXRKRHFVYXB1RGhoQ1Ztd0dscHdtbW9iLUpZUS1aRnRzWGdMYkc0ME9STEE4S2o0ekJHcVRaWnJlU0NSeTlhWmlzMkRtY1RYdERDZHlyb2NPczYxQ1F1c3ROZnlWRFJ4ei1DMVo4NkMxd3NFM08tZTFMR054OTdERW84Qjh0VlBxTk13U0h4XzloYnVwQzIxbE8tT21rN0h1WFYxX2JZa29TN3lYZXlHZV9IZFBkRnJybFQwWVh3X1Vsak1MSDVFYk9za3JLcU8yaFlCUktzVWxub2V1WGo2TjkwelNYZC1mbURRU1BaNFR2WEhwT2xCemxMZk9WZTFiUXprSWpBa2xGa29Cdm1BRjNDcGpwMWE0U0toVzRZNzUteWxaVXMwUUNLLUZ6MmRMN3BzQ3Rva0o5eWpsM1pFMjhhSlFodjRVVVAyeGtkZGdTbzAwVnZtLWFqTUtnQ2lfQ19VT2dDcXF1a0d2T1lTWUVlSkRmYTBPRVFJMWREZWNIUHFTMD0=?session_token=069f0332-2a70-41e1-889d-0f6d12b0372d&access_token=pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w">
+    <title>Locais salvos</title>
+</head>
+<body>
+  
+  <div class="nav-box">
+ <div class="nav-superior">
+    <a href="regiao.html"><button>Região</button></a>
+    <a href="relatos.html"><button>Relatos</button></a>
+     <div class="nav-line"><a><button>Salvos</button></a>
+      <div class="line"></div>
+    </div>
+  </div>
+  </div>
+  
+  
+  <div class="space"></div>
+  <div class="justify">
+    <form class="form">
+    <label for="search">
+        <input class="input" oninput="searchLocation()" type="text" id="search-input" placeholder="Digite o nome do local" >
+        <div class="fancy-bg"></div>
+        <div class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="r-14j79pv r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-4wgw6l r-f727ji r-bnwqim r-1plcrui r-lrvibr">
+                <g>
+                    <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                </g>
+            </svg>
+        </div>
+
+    </label>
+</form>
+</div>
+  
+<div class="slide">
+<div class="center">
+  
+  <div class="thou">
+    <img id="ic" src="./ICONS/loc.png">
+  <h2 id="local">
+    Pesquise a região
+  </h2>
+  </div>
+  <h3>Defina a localização no mapa para ficar informado sobre a segurança próxima dele.</h3>
+</div>
+
+
+  
+
+
+  <div class="map-box">
+    <div id="map"></div>
+    </div>
+    
+<div class="center">
+
+<!--teste-->
+
+<!--pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w-->
+
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w';
+  const bounds = [
+    [-47.17238, -24.481404], // Southwest coordinates
+    [-45.60648, -23.71610]   // Northeast coordinates
+  ];
+
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/theblessed/cljevk6l600bs01qpa2ma5zh5',
+    center: [-46.623436, -24.095945],
+    zoom: 10,
+    maxBounds: bounds
+  });
+
+  var h2Element = document.getElementById("local");
+
+  function searchLocation() {
+    var query = document.getElementById('search-input').value;
+
+    if (query) {
+      fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/' + query + '.json?access_token=' + mapboxgl.accessToken)
+        .then(response => response.json())
+        .then(data => {
+          if (data.features.length === 0) {
+            h2Element.textContent = "Local não encontrado";
+            h2Element.style.color = "red";
+             icon.src = './ICONS/locationoff.png';
+            return;
+          }
+
+          var coordinates = data.features[0].geometry.coordinates;
+          map.flyTo({ center: coordinates, zoom: 17 });
+
+          var nomeCidade = '';
+          for (const component of data.features[0].context) {
+            if (component.id.includes('place')) {
+              nomeCidade = component.text;
+              break;
+            }
+          }
+
+          h2Element.textContent = nomeCidade;
+          h2Element.style.color = "black";
+        })
+        .catch(error => {
+          console.error('Error fetching location:', error);
+        });
+    } else {
+      h2Element.textContent = "Ou selecione o local no mapa";
+      h2Element.style.color = "black";
+    }
+  }
+
+  map.on('click', function (e) {
+    var coordinates = e.lngLat;
+
+    var locationAlert = document.createElement('div');
+    locationAlert.className = 'alert_conteiner';
+    locationAlert.innerHTML = `
+    <div class="alert">
+      <b>Deseja salvar o local?</b>
+      <br>
+      <input type="text" id="locationName" placeholder="Defina o nome">
+      <br>
+      <div class="selec">
+        <button class="cancel"><img src="./ICONS/close.png">Cancelar</button>
+        <button class="save"><img src="./ICONS/cad.png">Salvar</button>
+      </div>
+      <div/>
+    `;
+
+    locationAlert.querySelector('.cancel').addEventListener('click', function () {
+      document.body.removeChild(locationAlert);
+    });
+
+    locationAlert.querySelector('.save').addEventListener('click', function () {
+      var savedLocation = document.createElement('div');
+      savedLocation.className = 'salvo';
+
+      var nomeLocal = document.getElementById('locationName').value;
+
+      fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/' + coordinates.lng + ',' + coordinates.lat + '.json?access_token=' + mapboxgl.accessToken)
+        .then(response => response.json())
+        .then(data => {
+          if (data.features.length === 0) {
+            h2Element.textContent = "Local não encontrado";
+            h2Element.style.color = "red";
+            return;
+          }
+          var nomeCidade = '';
+          for (const component of data.features[0].context) {
+            if (component.id.includes('place')) {
+              nomeCidade = component.text;
+              break;
+            }
+          }
+
+          savedLocation.innerHTML = `
+            <div class="title-s">
+              <div class="tex">
+                <img id="ic" src="./ICONS/loc.png">
+                <b class="city">${nomeCidade}</b>
+                <img src="./ICONS/notification-b.png" class="j"><b class="n-of-alerts">0</b>
+              </div>
+              <button class="ar"><img src="./ICONS/delete_2.png">Excluir</button>
+            </div>
+            <div class="conteiner">
+              <div class="title-c">
+                <b>${nomeLocal}</b>
+                <button onclick="redirect('pesquisa.html')"><img src="./ICONS/dados.png">Visualizar dados da localização</button>
+              </div>
+            </div>
+          `;
+
+          document.getElementById('box-salvos').appendChild(savedLocation);
+
+          document.body.removeChild(locationAlert);
+        })
+        .catch(error => {
+          console.error('Error fetching location:', error);
+        });
+    });
+
+    document.body.appendChild(locationAlert);
+
+    map.flyTo({ center: coordinates, zoom: 17 });
+
+    var markerElement = document.createElement('div');
+    markerElement.className = 'custom-marker';
+    new mapboxgl.Marker(markerElement)
+      .setLngLat(coordinates)
+      .addTo(map);
+  });
+</script>
+
+<style>
+  .custom-marker {
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 50%;
+    border: 2px solid #fff;
+  }
+</style>
+
+
+  
+  <div id="box-salvos">
+    
+
+    
+  </div>
+  <div class="nav-inferior">
+  
+  <div class="nav-line">
+  <a href="regiao.html"><button class="icon"><img src="./ICONS/home.png"></button></a>
+  </div>
+
+  <a href="notificacao.html"><button><img src="./ICONS/notificacao2.png"></button></a>
+  
+  <a href="conta.html"><button><img src="./ICONS/persons.png"></button></a>
+  
+  <a href="configuracao.html"><button><img src="./ICONS/config2.png"></button></a>
+</div>
+  
+  </body>
+  </html>

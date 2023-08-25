@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-menu.css">
+    <link rel="stylesheet" href="./css/style-data.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <script src="./components/script-nav.js"></script>
+    <script src="./components/loader.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <title>Sua região</title>
+</head>
+<body onload="obterLocalizacao()">
+    <div class="nav-box">
+        <div class="nav-superior">
+    <div class="nav-line"><a><button>Região</button></a>
+      <div class="line"></div>
+    </div>
+    <a href="relatos.html"><button>Relatos</button></a>
+    <a href="salvos.html"><button>Salvos</button></a>
+  </div>
+    </div>
+
+    <div class="slide">
+        <div class="center">
+            <div class="title">
+                <b><h2 id="local">Sua localização</h2></b>
+               <div id="pesquisar"><a href="pesquisa.html"><button><img src="./ICONS/travel.png">Pesquisar região </button></div></a>
+            </div>
+        </div>
+        <div class="map-box">
+            <div id="map"></div>
+        </div>
+    </div>
+
+<div class="slide2">
+    <div class="center">
+        <div id="dados">
+            <div class="title2">
+                <b><h2>Dados da região</h2></b>
+            </div>
+            </div>
+            <div class="table">
+               <div class="data" id="ccv">
+         <b>Crimes contra a vida</b>
+         
+         <div class="content">
+           
+          <b>Homicídio Doloso: <i id="hmd">0</i></b>
+          <b>Tentativa de Homicídio: <i id="tdh">0</i></b>
+          <b>Latrocínio: <i id="ltr">0</i></b>
+          <b>Homicídio Culposo por Acidente de Trânsito: <i id="hcat">0</i></b>
+          <b>Homicídio Doloso por Acidente de Trânsito: <i id="hdat">0</i></b>
+           
+         </div>
+       </div>
+       
+       <div class="data" id="ccif">
+         <b>Crimes contra a integridade física</b>
+       </div>
+       
+       <div class="data" id="ccp">
+         <b>Crimes contra o patrimônio</b>
+       </div>
+       
+       <div class="data" id="ccpsp">
+         <b>Crimes contra a propriedade e segurança pública</b>
+       </div>
+            </div>
+            <div id="_msg">
+                <i>*Os dados são atualizados mensalmente</i>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-inferior">
+        <div class="nav-line">
+            <a href="regiao.html"><button class="icon"><img src="./ICONS/home.png"></button></a>
+        </div>
+        <a href="notificacao.html"><button><img src="./ICONS/notificacao2.png"></button></a>
+        <a href="conta.html"><button><img src="./ICONS/persons.png"></button></a>
+        <a href="configuracao.html"><button><img src="./ICONS/config2.png"></button></a>
+    </div>
+
+
+
+
+     <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w';
+
+            const bounds = [
+                [-47.17238, -24.481404],
+                [-45.60648, -23.71610]
+            ];
+
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/theblessed/cljevk6l600bs01qpa2ma5zh5',
+                center: [-122.433247, 37.742646],
+                zoom: 2,
+                maxBounds: bounds
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                var onSuccess = function (position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    const customIcon = createCustomIcon();
+                    const marker = new mapboxgl.Marker({ element: customIcon })
+                        .setLngLat([longitude, latitude])
+                        .addTo(map);
+
+                    map.flyTo({ center: [longitude, latitude], zoom: 16 });
+                    getCityName(latitude, longitude);
+                };
+
+                function onError(error) {
+                    console.error('Error getting user location:', error.message);
+                }
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+                } else {
+                    console.error('Geolocation is not supported by this browser.');
+                }
+
+                function createCustomIcon() {
+                    const iconElement = document.createElement('div');
+                    iconElement.style.width = '10px';
+                    iconElement.style.height = '10px';
+                    iconElement.style.backgroundColor = '#0074D9';
+                    iconElement.style.border = '2px solid #FFFFFF';
+                    iconElement.style.borderRadius = '50%';
+                    return iconElement;
+                }
+
+                function getCityName(latitude, longitude) {
+                    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?types=place&access_token=${mapboxgl.accessToken}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const cityName = data.features[0].text;
+                            console.log('City Name:', cityName);
+                            document.getElementById("local").textContent = cityName;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching location:', error);
+                        });
+                }
+            });
+        </script>
+</body>
+</html>

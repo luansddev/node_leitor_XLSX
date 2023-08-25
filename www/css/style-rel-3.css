@@ -1,0 +1,373 @@
+@font-face {
+  font-family: 'Avant';
+  src: url('../FONTS/AvantGarde-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Glacial';
+  src: url('../FONTS/GlacialIndifference-Bold.woff');
+}
+
+@font-face {
+  font-family: 'GlacialR';
+  src: url('../FONTS/GlacialIndifference-Regular.woff');
+}
+
+.center {
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  padding: 0 10px;
+}
+
+.title-rel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.align {
+  margin: 10px 10px;
+  display: flex;
+  flex-direction: line;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.title-rel button {
+  background: #fff;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.title-rel button img {
+  width: 25px;
+}
+
+.title-rel b{
+  margin-top: 15px;
+  margin-bottom: auto;
+  font-family: "GlacialR", Sans-Serif;
+  font-size: 2.0em;
+  margin-right: auto;
+  margin-left: 5px;
+}
+
+.title-rel button:nth-child(2) {
+  margin-left: 266px;
+}
+
+.ins {
+  margin-top:30px;
+}
+
+.ins i {
+  font-family: "GlacialR", Sans-Serif;
+  font-size: 1.2em;
+  font-style: normal;
+}
+
+.sim {
+  width: 50%;
+  height: 40px;
+  font-family: "GlacialR", sans-serif;
+  color: #fff;
+  background: blue;
+  border: none;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.no {
+  width: 50%;
+  height: 40px;
+  font-family: "GlacialR", sans-serif;
+  color: #fff;
+  background: #000;
+  border: none;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+}
+
+.align-2 {
+  margin: 30px 0;
+  display: flex;
+  flex-direction: line;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.none p {
+  font-family: "GlacialR", Sans-Serif;
+  font-size: 1.2em;
+  font-style: normal;
+  margin: 0;
+}
+
+.ok {
+  width: 80px;
+  height: 40px;
+  font-family: "GlacialR", sans-serif;
+  color: #000;
+  background: #fff;
+  border: solid 1px #000;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+.yes form button {
+  width: 150px;
+  height: 40px;
+  font-family: "GlacialR", sans-serif;
+  color: #fff;
+  background: green;
+  border: none;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.line {
+  width: auto;
+  height: 1px;
+  background: #dfdfdf;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  display: none;
+}
+
+@keyframes surgir {
+  0% {
+    opacity: 0;
+    top: 50px;
+  }
+  100% {
+    opacity: 1;
+    top: 0px;
+  }
+}
+
+@keyframes surgir2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.yes {
+  animation-name: surgir;
+  animation-duration: 0.6s;
+  animation-iteration-count: 1;
+  position: relative;
+}
+
+.none {
+  animation-name: surgir;
+  animation-duration: 0.6s;
+  animation-iteration-count: 1;
+  position: relative;
+}
+
+.text {
+  animation-name: surgir2;
+  animation-duration: 1.5s;
+  animation-iteration-count: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.text p {
+  font-family: "GlacialR";
+  font-size: 1.5em;
+}
+
+.text textarea {
+  width: 90%;
+  height: 450px;
+  resize: none;
+  outline: none;
+  border: none;
+  border-left: solid 0.2px #d3d3d3;
+  border-right: solid 0.2px #d3d3d3;
+  background: none;
+  padding: 15px;
+  font-family: "GlacialR", Sans-Serif;
+  font-size: 1.0em;
+}
+
+.text textarea:hover {
+  background: #f5f5f5;
+  transition: all 0.5s;
+}
+
+.ab {
+  width: 50%;
+  height: 40px;
+  font-family: "GlacialR", sans-serif;
+  color: #fff;
+  background: green;
+  border: none;
+  font-size: 0.9em;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  margin-left: calc(100% - 50%);
+}
+
+.abc {
+  width: 150px;
+  height: 40px;
+  font-family: "GlacialR", sans-serif;
+  color: #fff;
+  background: blue;
+  border: none;
+  font-size: 1.2em;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-left: calc(90% - 117px);
+}
+
+@keyframes slide{
+  0% {
+    right: 100px;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+} 
+
+.slide {
+  position: relative;
+  animation-name: slide;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.text {
+  display: none;
+}
+
+.text0 {
+  display: none;
+}
+
+.ali0 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.ali {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 440px;
+}
+
+.old {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.aberta {
+  display: block;
+}
+
+.input-group {
+  position: relative;
+ }
+ 
+ .input {
+  width: 100%;
+  border: solid 1.5px #ccc;
+  border-radius: 5px;
+  background: none;
+  padding: 1rem;
+  font-size: 1rem;
+  color: #000;
+  transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+ }
+ 
+ .user-label {
+   text-align: center;
+  position: absolute;
+  left: 15px;
+  color: #000;
+  transform: translateY(1rem);
+  transition: 300ms cubic-bezier(0.4,0,0.2,1);
+  font-family: "GlacialR", Sans-Serif;
+ }
+ 
+ .input:focus ~ label, input:valid ~ label {
+  transform: translateY(-50%) scale(0.9);
+  background-color: #fff;
+  padding: 0.2em;
+ }
+
+ input {
+  box-sizing: border-box;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  background: #fff;
+  width: 100%;
+  height: 50px;
+  outline: none;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  font-family: "GlacialR", sans-serif;
+  font-size: 1.2em;
+}
+
+#ol {
+  font-family: "GlacialR", sans-serif;
+    font-size: 1.1em;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.ug button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  border: solid 1px #000;
+  border-radius: 5px;
+  color: #fff;
+  font-family: "GlacialR", Sans-Serif;
+  width: 50%;
+  height: 40px;
+  margin-left: auto;
+  margin-top: 10px;
+}
+
+.ug button img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+#oll {
+  font-family: "GlacialR", sans-serif;
+  margin-top: 20px;
+  font-size: 1.2em;
+}

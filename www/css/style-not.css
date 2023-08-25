@@ -1,0 +1,188 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  @font-face {
+    font-family: 'Avant';
+    src: url('../FONTS/AvantGarde-Bold.otf');
+  }
+  
+  @font-face {
+    font-family: 'Glacial';
+    src: url('../FONTS/GlacialIndifference-Bold.woff');
+  }
+  
+  @font-face {
+    font-family: 'GlacialR';
+    src: url('../FONTS/GlacialIndifference-Regular.woff');
+  }
+  
+  .nav-box {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-inferior img {
+    width: 30px;
+  }
+  
+  .nav-inferior a button {
+    background: none;
+    border: none;
+  }
+  
+  button:hover {
+    transform: scale(0.8);
+    transition: all 0.4s;
+  }
+  
+  .no {
+    background: none;
+    border: none;
+  }
+  
+  .nav-inferior {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: #000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: -12px -1px 19px 5px rgba(0,0,0,0.25);
+  }
+  
+  
+  @keyframes slide{
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+ .slide {
+    margin-top: 10px;
+  margin-bottom: 100px;
+  opacity: 0;
+  animation-name: slide;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  }
+  
+  .center {
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  h2 {
+    font-family: "GlacialR", Sans-Serif;
+    font-size: 2.1em;
+    margin-left: 10px;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .box-not {
+    min-width: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    margin-top: 50px;
+    border-radius: 3px;
+  }
+
+  .img-box {
+    display: flex;
+    flex-wrap: row;
+  }
+
+  .img-box img {
+    width: 30px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .align {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 5px;
+    justify-content: space-between;
+  }
+
+  .align b {
+    font-family: "GlacialR", sans-serif;
+    font-size: 1.2em;
+  }
+
+  .align b:nth-child(2) {
+    font-family: "GlacialR", sans-serif;
+    font-size: 1.0em;
+    margin-left: 100px;
+  }
+
+  .align i {
+    font-family: "GlacialR", sans-serif;
+    font-style: normal;
+  }
+
+  .text-not {
+    margin-top: 15px;
+  }
+
+  .text-not i {
+    font-family: "GlacialR", sans-serif;
+    color: #000;
+  }
+
+  .content-not {
+    padding-bottom: 10px;
+  }
+
+  .title-not {
+    display: flex;
+    flex-direction: line;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .title-text-not {
+    margin-left: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .title-text-not b {
+    font-family: "Glacial", sans-serif;
+    font-size: 1.2em;
+  }
+
+  .title-text-not b:nth-child(2) {
+    font-family: "GlacialR", sans-serif;
+    font-size: 1.0em;
+  }
