@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-conta3.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+        <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="./components/conexao.js"></script>
+    <title>Recuperar senha</title>
+</head>
+<body>
+    <script>
+  function enviarEmailRecuperacaoSenha() {
+            const email = document.getElementById("email").value;
+
+            firebase.auth().sendPasswordResetEmail(email)
+                .then(function () {
+                    alert("E-mail de redefinição de senha enviado.");
+                })
+                .catch(function (error) {
+                    console.error("Erro ao enviar e-mail de redefinição de senha:", error);
+                    alert("Ocorreu um erro ao enviar o e-mail de redefinição de senha. Verifique o endereço de e-mail e tente novamente.");
+                });
+        }
+    </script>
+<div class="slide"> 
+    <div class="align">
+    <div class="title-rel">
+        <div class="align">
+          <button onclick="redirect('conta.html')"><img src="./ICONS/exit_.png"></button>
+        </div>
+      </div>
+    </div>
+   
+
+  <div class="title-z">
+    <div class="title-z-1">
+        <b>Recuperar acesso</b>
+    </div>
+  </div>
+  
+
+  <div class="align">
+
+
+    <div class="pass">
+    <div class="input-group">
+      <input required="" id="email" type="password" name="Senha" autocomplete="off" class="input">
+      <label class="user-label">Digite seu e-mail</label>
+    </div>
+    <div class="un">
+    <button onclick="enviarEmailRecuperacaoSenha()">Avançar</button>
+  </div>
+    </div>
+</div>
+<div class="align">
+    <div class="verification">
+      <div class="input-group">
+        <label class="user-label">Foi enviado um -mail</label>
+      </div>
+      <div class="un"> 
+      <button onclick="abrir3()">Avançar</button>   
+    </div>
+    </div>
+   </div> 
+
+
+    <div class="end">
+      <div class="input-group">
+        <input required="" type="password" name="Senha" autocomplete="off" class="input">
+        <label class="user-label">Digite a sua nova senha</label>
+      </div>
+      <div class="ug">
+        <button onclick="retur2()"><img src="./ICONS/undo.png">Anterior</button> 
+        <button style="background:blue;border:none;"onclick="redirect('regiao.html')"><img src="./ICONS/cad.png">Definir senha</button> 
+      </div>
+    </div>
+    
+</div>   
+ 
+ <script src="./components/script-conta.js"></script>
+</body>
+</html>

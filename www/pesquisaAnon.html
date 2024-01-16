@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-search.css">
+    <link rel="stylesheet" href="./css/style-rel.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet'/>
+    <link href="https://api.mapbox.com/search/searchbox/v1/suggest?q={search_text}">
+    <link href="https://api.mapbox.com/search/searchbox/v1/retrieve/dXJuOm1ieHJldDpDcE5oLVItdzlDb29tY3Z1NVZveWtUa0VtNlg3d2VhQmptRHZubEFiYWtQSUpsZHZqcldaOXRydDZKWXQtYzREcFZCSC1NMmxLVzFjSTdlWE9JOFE4dUp6QlVLQkJNRFYyeGtRNmJOUUZXOWo4UGJuTGpwTlIzSzR1WWZoTVI0eXNGbmRTZlZ1WWVjeGVKa3lwcHhfU09VWjlTTDlISkxRcDRVSjlKUVdYUWhfSkpaOEk5bktobUlNVDJYUUd3VFluY1N0LTZBd0dhOHB0ZWVKR3hXYUpGSzMzbkdkcS14Yllra2FVMndJUmF3UWxvM3pPX1pzRkNoczI1cDk5eVBjbFpwXzhwbWEzV0YwMVY4ZEsxX1Q5TFp5dVVLNi1fMC1keGlQbWtId0hxWV9wNUlTS19vRUo2eVo3NklmMTFlS1pvR1pwZ3pqc1lGc0l5VHRDZ00yZ3NKRzctMU5zU2gxNXk3eHJKbGxkQ25sU29Ba3NwRWhJMmtjWV96cU5xSS1FSXhNU093SnEyd01FTEJ4X0taVnpoVGtlNTFHMGJXNnVQX2t1OWxVOTFYQ2pOZkVueThrVUxKQVZoR015b3dHeVlwYzltOUp2eWg2Znp1aG1LYkRIc2RMUDRiQlNnX2djWWdTaHNNRHpxMXV5bzJRLXpWdGFXZlFDOGFBREhDWFd3cl9Xbjh1ODJ3NTFEMkhRLXZpMmtyM3BNdnFtUUJQNjJtdklWQWtTUWk1NWN1X2NfQ3ZEVGRROEFoZ1RnNU1FcmpZMWYySmNIVjFiZTNaeVAwbTBxZmhOaVVLMExNakctMkZQVjEyRDEyUHJnN0hoUUlyM3VGWjRyeVR3NUxtaEJISFp1bWhoUVIwdGloWEtEU0ZiRmtwSHBGRzR3WlI2ZGtqNVJiMFhUQ0MzNDJHTWE3WWxkV2F1Z01DcUlXODl1MTlzUTVQb3RVWEhFRnFXTkpKM1RMMk5iRXpmTWZ6LUtlSFd2WmNkU0ZlVVdYZl9teEU1VkRRcXpZU1RKZTRKVk8wSzFzQWN2Mmw4dWxUbnRlX2x5MUk4Qk8yZDNwMzJ2WGVKWDJDSzFXV3ZWR0FBVUk2MzJsMHZZYkVMeWh5cloxRXdKOWlNSmNmY2RCVy1aZGFVNGZzMHNjRUgyTXl5Z0lyX0J4QlpWSHR0QWlsT0JnSWNTWWNBUHZWMWNhNG5oT1RnYjgwanphbjhEbWJ5RXJ3Njc2WndxT1dxemJyS240U085cjJkZHhSNzJQNEJzdmZLTThSZmJwYmhiVjJUdlRGRHdiSThkb2ZYeTNCcnhGcEVMOUV3WV9iVmNUOXo2cHFjVHYzTjRRekxKM0RFQk9LamVkd1RRemE3SktqUzFyelI3b0NkaFVQQmJJWllfX1FfV2ZfRWRxcDVMaDNLRms1UUNYcFJOQ3RWR2NvMG1GYm9hTzFKalZiSFJIYy1lUXROS28tLUp4ZjctRzRySWxHOUljRVVQV3lUbUx0dDd1VlB0NERnRHdaQmRGdllxT2lLdUF1UTRsWXFnOEluNW1odTJlTmtlUUF5STBueW5vcjRPV1QtWWRtWnRDU3JBd1RoYjdRV3ktMUZmSWxvbEZyZENCdjd5V1doZ1ZYUVNiXzM0a1Njb3dOb0tOTVhDU3l1OW1lcE0wTDF2RTczTk54dGRINWVIS2RRa05lMmxRWGRsd0M4bWluVlVYR0FDV0RYczJlRndVaGZZb1V0Wnl4RHRXQlRPeW03c3FOZmpIQm9qdTIyU3hvTzlINzM4Y2IzVEJ1MGFJSEpqRzZnTDhlUlcyUU5oODFtUHhNWUZzTzExeVZmX05weFBjOUtFUmRWSmZIQ0tyMDB6M3hSUDN2cFN5aWhBaktGdkE2UUJNTXRQX3FVYXRKRHFVYXB1RGhoQ1Ztd0dscHdtbW9iLUpZUS1aRnRzWGdMYkc0ME9STEE4S2o0ekJHcVRaWnJlU0NSeTlhWmlzMkRtY1RYdERDZHlyb2NPczYxQ1F1c3ROZnlWRFJ4ei1DMVo4NkMxd3NFM08tZTFMR054OTdERW84Qjh0VlBxTk13U0h4XzloYnVwQzIxbE8tT21rN0h1WFYxX2JZa29TN3lYZXlHZV9IZFBkRnJybFQwWVh3X1Vsak1MSDVFYk9za3JLcU8yaFlCUktzVWxub2V1WGo2TjkwelNYZC1mbURRU1BaNFR2WEhwT2xCemxMZk9WZTFiUXprSWpBa2xGa29Cdm1BRjNDcGpwMWE0U0toVzRZNzUteWxaVXMwUUNLLUZ6MmRMN3BzQ3Rva0o5eWpsM1pFMjhhSlFodjRVVVAyeGtkZGdTbzAwVnZtLWFqTUtnQ2lfQ19VT2dDcXF1a0d2T1lTWUVlSkRmYTBPRVFJMWREZWNIUHFTMD0=?session_token=069f0332-2a70-41e1-889d-0f6d12b0372d&access_token=pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Pesquisar região</title>
+</head>
+<body>
+  <div class="justify">
+    <button onclick="redirect('regiaoAnon.html')"><img src="./ICONS/exit_.png"></button>
+    <form class="form">
+    <label for="search">
+        <input class="input" oninput="searchLocation()" type="text" id="search-input" placeholder="Digite o nome do local" >
+        <div class="fancy-bg"></div>
+        <div class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="r-14j79pv r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-4wgw6l r-f727ji r-bnwqim r-1plcrui r-lrvibr">
+                <g>
+                    <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                </g>
+            </svg>
+        </div>
+    </label>
+</form>
+</div>
+<div class="slide">
+<div class="center">
+  <div class="thou">
+    <img id="ic" src="./ICONS/loc.png">
+  <h2 id="local">
+    Pesquise a região
+  </h2>
+  </div>
+</div>
+  <div class="map-box">
+    <div id="map"></div>
+    </div>
+<div class="center">
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w';
+const bounds = [
+    [-53.372976, -25.335800],
+    [-44.199839, -19.598577]
+];
+
+var map = new mapboxgl.Map({
+  container: 'map',
+  center: [-46.623436, -24.095945],
+  zoom: 10,
+  style: 'mapbox://styles/theblessed/clo37ffol00dg01p6d1hwgh7y',
+  maxBounds: bounds
+});
+
+  function searchLocation() {
+  var query = document.getElementById('search-input').value;
+  var h2Element = document.getElementById("local");
+  var icon = document.getElementById("ic");
+
+  if (query) {
+    var bbox = '-47.17238,-24.481404,-45.60648,-23.71610';
+
+    fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/' + query + '.json?bbox=' + bbox + '&access_token=' + mapboxgl.accessToken)
+      .then(response => response.json())
+      .then(data => {
+        if (data.features.length === 0) {
+          h2Element.textContent = "Local não encontrado";
+          h2Element.style.color = "red";
+          icon.src = './ICONS/locationoff.png';
+          map.flyTo({ center: coordinates, zoom: 0 });
+          return;
+        }
+
+        var coordinates = data.features[0].geometry.coordinates;
+        map.flyTo({ center: coordinates, zoom: 17 });
+
+        var nomeCidade = '';
+        for (const component of data.features[0].context) {
+          if (component.id.includes('place')) {
+            nomeCidade = component.text;
+            break;
+          }
+        }
+
+        h2Element.textContent = nomeCidade;
+        h2Element.style.color = "black";
+        icon.src = './ICONS/loc.png';
+      })
+      .catch(error => {
+        console.error('Error fetching location:', error);
+      });
+  } else {
+    h2Element.textContent = "Pesquise a região";
+    h2Element.style.color = "black";
+    icon.src = './ICONS/loc.png';
+    map.flyTo({ center: coordinates, zoom: 0 });
+  }
+}
+</script>
+<div class="align-menu">
+  <button onclick="abrir1()"><img src="./ICONS/insights.png">Dados</button>
+  <button onclick="abrir2()"><img src="./ICONS/relato.png">Relatos</button>
+</div>
+<div class="content-1">
+  <div class="230"></div><p>Os dados da região pesquisada aparecerão aqui.</p>
+  
+<div class="table">
+  <div class="data ccv">
+    <b>Crimes contra a vida</b>
+    <div class="align-002">
+    <div class="content">
+      <b>Homicídio Doloso: <i id="hmd">0</i></b>
+      <b>Tentativa de Homicídio: <i id="tdh">0</i></b>
+      <b>Latrocínio: <i id="ltr">0</i></b>
+      <b>Homicídio Culposo por Acidente de Trânsito: <i id="hcat">0</i></b>
+      <b>Homicídio Doloso por Acidente de Trânsito: <i id="hdat">0</i></b>
+    </div>
+    <div class="grafico-0">
+        <canvas id="myChart2" width="20" height="10"></canvas>
+        </div>
+    </div>
+    <div class="grafico">
+    <canvas id="myChart" width="20" height="10"></canvas>
+    </div>
+  </div>
+  <div class="data ccif">
+    <b>Crimes contra a integridade física</b>
+    <div class="align-002">
+    <div class="content">
+      <b>Estupro: <i id="hmd">0</i></b>
+      <b>Estupro de vulnerável: <i id="tdh">0</i></b>
+      <b>Lesão corporal: <i id="ltr">0</i></b>
+      <b>Lesão corporal seguida de morte: <i id="hcat">0</i></b>
+    </div>
+    <div class="grafico-0">
+        <canvas id="myChart01" width="20" height="10"></canvas>
+        </div>
+    </div>
+    <div class="grafico">
+    <canvas id="myChart001" width="20" height="10"></canvas>
+    </div>
+  </div>
+  <div class="data ccp">
+    <b>Crimes contra o patrimônio</b>
+        <div class="align-002">
+    <div class="content">
+      <b>Roubo de veículo: <i id="hmd">0</i></b>
+      <b>Furto de veículo: <i id="tdh">0</i></b>
+    </div>
+    <div class="grafico-0">
+        <canvas id="myChart03" width="20" height="10"></canvas>
+        </div>
+    </div>
+    <div class="grafico">
+    <canvas id="myChart003" width="20" height="10"></canvas>
+    </div>
+  </div>
+  <div class="data ccpsp">
+    <b>Crimes contra a propriedade e segurança pública</b>
+        <div class="align-002">
+    <div class="content">
+      <b>Roubo a banco: <i id="hmd">0</i></b>
+      <b>Roubo de carga: <i id="tdh">0</i></b>
+    </div>
+    <div class="grafico-0">
+        <canvas id="myChart04" width="20" height="10"></canvas>
+        </div>
+    </div>
+    <div class="grafico">
+    <canvas id="myChart004" width="20" height="10"></canvas>
+    </div>
+  </div>
+</div>
+</div>
+<div class="content-2">
+  <div class="relato">
+    <div class="center">
+      <div class="conteudo-relato">
+    <div class="box-relato">
+      <div class="title-relato">
+        <div class="box-u">
+        <b>#fgDahJ</b>
+        <i>20/10/2023 <b> • </b><strong>22:35</strong></i>
+        </div>
+        <div class="security">
+        <button class="saved" onclick="altIcon1(this)"><img src="./ICONS/salve.png"></button>
+        
+        <button class="dd" onclick="altIcon2(this)"><img id="savedImage2" src="./ICONS/outflag.png"></button></div>
+      </div>
+                  <div class="line-h"></div>
+      <center>
+           <div class="text">
+                    <section> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</section>
+      </center>
+                   <div class="line-h"></div>
+   <div class="coment">
+     <div class="coment-title">  
+       <img src="./ICONS/coment.png">
+         <b class="nm_coment">Comentários</b>
+         
+       <button class="close" onclick="close(this)"><img src="./ICONS/up.png"><b>Fechar</b></button>
+     </div>  
+         <div class="nav-coment-box">
+           <div class="nav-coment">
+             <button><textarea placeholder="Comentar"></textarea>
+   <div class="line-v1"></div>
+   <button><img src="./ICONS/send.png"></button>
+   </button>
+           </div>
+       </div>
+     <center><div class="line-x"></div></center>
+     <div class="comentario-box">
+       <div class="text-coment">
+         <div class="title-div-coment">
+   
+        <div class="box-c">
+        <b>#fgDahJ</b>
+        <i>20/10/2023 <b> • </b><strong>22:40</strong></i>
+           </div>
+            <div class="security-coment">
+        <button class="saved" onclick="altIcon3(this)"><img src="./ICONS/flagout.png"></button>
+    </div>
+         </div>
+         <div class="coment-text">
+          <u>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</u></div>
+       <center><div class="line-coment"></div></center>
+       </div>
+   </div>
+   </div>
+   <div class="comentario" onclick="coment(this)"><a>Comentários<b class="nm_coment2"></a></b></div>
+ </div>
+ </div>
+      <div class="conteudo-relato">
+    <div class="box-relato">
+      <div class="title-relato">
+        <div class="box-u">
+        <b>#phWqlJ</b>
+        <i>20/11/2023 <b> • </b><strong>23:02</strong></i>
+        </div>
+        <div class="security">
+        <button class="saved" onclick="altIcon1(this)"><img src="./ICONS/salve.png"></button>
+        <button class="dd" onclick="altIcon2(this)"><img id="savedImage2" src="./ICONS/outflag.png"></button></div>
+      </div>
+                  <div class="line-h"></div>
+      <center>
+           <div class="text">
+                    <section>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</section>
+      </center>
+                   <div class="line-h"></div>
+   <div class="coment">
+     <div class="coment-title">  
+       <img src="./ICONS/coment.png">
+         <b class="nm_coment">Comentários</b>
+         
+       <button class="close" onclick="close(this)"><img src="./ICONS/up.png"><b>Fechar</b></button>
+     </div>  
+         <div class="nav-coment-box">
+           <div class="nav-coment">
+             <button><textarea placeholder="Comentar"></textarea>
+   <div class="line-v1"></div>
+   <button><img src="./ICONS/send.png"></button>
+   </button>
+           </div>
+       </div>
+     <center><div class="line-x"></div></center>
+     <div class="comentario-box">
+                <div class="text-coment">
+         <div class="title-div-coment">
+   
+        <div class="box-c">
+        <b>#fgDahJ</b>
+        <i>20/10/2023 <b> • </b><strong>23:05</strong></i>
+           </div>
+            <div class="security-coment">
+        <button class="saved" onclick="altIcon3(this)"><img src="./ICONS/flagout.png"></button>
+    </div>
+         </div>
+         <div class="coment-text">
+          <u>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</u></div>
+       <center><div class="line-coment"></div></center>
+       </div>
+              <div class="text-coment">
+         <div class="title-div-coment">
+   
+        <div class="box-c">
+        <b>#phWqlJ</b>
+        <i>20/10/2023 <b> • </b><strong>23:15</strong></i>
+           </div>
+            <div class="security-coment">
+        <button class="saved" onclick="altIcon3(this)"><img src="./ICONS/flagout.png"></button>
+    </div>
+         </div>
+         <div class="coment-text">
+          <u>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</u></div>
+       <center><div class="line-coment"></div></center>
+       </div>
+   </div>
+   </div>
+   <div class="comentario" onclick="coment(this)"><a>Comentários<b class="nm_coment2"></a></b></div>
+ </div>
+ </div>
+ </div>   
+    </div>
+    </div>
+    </div>
+    </div>
+ </div>  
+</div>
+</div>
+</div>   
+<div class="up"><button onclick="up()"><img src="./ICONS/up.png">voltar ao topo</button></div>
+<div class="nav-inferior">
+  <a href=""><button><img src="./ICONS/home.png"></button></a>
+    <a href="contaAnon.html"><button class="icon"><img src="./ICONS/persons.png"></button></a>
+  
+  <a href="configuracaoAnon.html"><button><img src="./ICONS/config2.png"></button></a>
+</div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w';
+    const map = new mapboxgl.Map({
+    container: 'map', 
+    style: 'mapbox://styles/mapbox/streets-v12', 
+    center: [-122.433247, 37.742646], 
+    zoom: 2, 
+    maxBounds: bounds 
+});
+</script>
+<script src='./components/script-search.js'></script>
+<script>
+  var data = {
+    datasets: [{
+      data: [100, 100, 100, 100, 100],
+      backgroundColor: ["#0000CD", "#00FF7F", "#9400D3", "#800000", "#FFD700"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98", "#BA55D3",  "#CD5C5C", "#F0E68C"]
+    }],
+    labels: ['Homicídio doloso', 'Tentativa de Homicídio', 'Latrocínio', 'Homicídio culposo por acidente de trânsito', 'Homicídio doloso por acidente de trânsito']
+  };
+  var ctx = document.getElementById("myChart").getContext("2d");
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [100, 50],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx = document.getElementById("myChart2").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [100, 100, 100, 100],
+      backgroundColor: ["#0000CD", "#00FF7F", "#9400D3", "#800000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98", "#BA55D3",  "#CD5C5C"]
+    }],
+    labels: ['Estupro', 'Estupro de vulnerável', 'Lesão corporal', 'Lesão corporal seguida de morte']
+  };
+  var ctx = document.getElementById("myChart001").getContext("2d");
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [100, 50],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx = document.getElementById("myChart01").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [100, 100],
+      backgroundColor: ["#0000CD", "#00FF7F"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Roubo de veículo', 'Furto de veículo']
+  };
+  
+  var ctx = document.getElementById("myChart003").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [100, 50],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx = document.getElementById("myChart03").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [100, 100],
+      backgroundColor: ["#9400D3", "#800000"],
+      hoverBackgroundColor: ["#BA55D3",  "#CD5C5C"]
+    }],
+    labels: ['Roubo a banco', 'Roubo de carga']
+  };
+  
+  var ctx = document.getElementById("myChart004").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [100, 50],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx = document.getElementById("myChart04").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
+</script>
+<script src="./components/divs.js"></script>
+</body>
+</html>

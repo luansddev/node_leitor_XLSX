@@ -99,9 +99,10 @@ body {
     width: 100%;
     padding: 0px 10px;
     margin-top: 20px;
-    display: none;
+
     animation: slow 1s 1 forwards;
     position: relative;
+    display: none;
   }
   
   .verification form label {
@@ -271,3 +272,29 @@ body {
 
 
   
+.msg-erro {
+    box-sizing: border-box;
+    background:#181818;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    animation-name: erross;
+    animation-duration: 0.3s;
+}
+.msg-erro b{
+    color: #fff;
+    font-family: "GlacialR";
+    font-weight: 100;
+    font-size: 0.9em;
+}
+@keyframes erross {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 2;
+    }
+}

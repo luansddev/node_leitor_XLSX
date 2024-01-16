@@ -1,20 +1,19 @@
+/* Fonts */
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
-
 @font-face {
   font-family: 'Avant';
   src: url('../FONTS/AvantGarde-Bold.otf');
 }
-
 @font-face {
   font-family: 'Glacial';
   src: url('../FONTS/GlacialIndifference-Bold.woff');
 }
-
 @font-face {
   font-family: 'GlacialR';
   src: url('../FONTS/GlacialIndifference-Regular.woff');
 }
 
+/* Styles */
 #dados {
   display: flex;
   flex-direction: column;
@@ -31,11 +30,13 @@
   display: flex;
   justify-content: left;
   flex-direction: column;
+  box-shadow:  8px 8px 34px #d3d3d3,
+             -8px -8px 34px #ededed;
 }
 
-.data > b {
+.data b {
   font-family: "GlacialR", Sans-Serif;
-  font-size: 1.3em;
+  font-size: 1.5em;
   margin-bottom: 20px;
 }
 
@@ -43,13 +44,19 @@
   display: flex;
   flex-direction: column;
   justify-content: left;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
 }
 
 .content b {
   font-family: "GlacialR";
   font-weight: normal;
   margin-bottom: 20px;
-  width: 200px;
+  color: #000;
+  font-size: 0.8em;
+  width: 150px;
 }
 
 .content i {
@@ -58,40 +65,139 @@
   margin-left: 10px;
 }
 
-#ccv {
+.ccv {
   display: flex;
   padding: 15px;
   background: #000;
   margin-top: 20px;
   color: #fff;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
-#ccif {
+.ccif {
   display: flex;
-  padding: 7px;
+  padding: 15px;
   background: #DC143C;
-  margin-top: 20px;
+  margin-top: 70px;
   color: #fff;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
-#ccp {
+.ccp {
   display: flex;
-  padding: 7px;
-  background: #A9A9A9;
-  margin-top: 20px;
-  border-radius: 4px;
+  padding: 15px;
+  background: #363636;
+  margin-top: 70px;
+  color: #fff;
+  border-radius: 8px;
 }
 
-#ccpsp {
+.ccpsp {
   display: flex;
-  padding: 7px;
-  background: #1E90FF;
-  margin-top: 20px;
-  border-radius: 4px;
+  padding: 15px;
+  background: #00008B;
+  margin-top: 70px;
+  color: #fff;
+  border-radius: 8px;
 }
 
+.grafico {
+  margin-top: 30px;
+  width: 100%;
+  background: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+}
 
-/*----------------------*/
+.align-002 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
+.grafico-0 {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  margin-left: 15px;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.datapp {
+  display: flex;
+  color: #000;
+  border-radius: 8px;
+  margin-bottom: 100px;
+}
+
+.datapp b {
+  display: flex;
+  align-items: center;
+  font-family: "GlacialR";
+  font-weight: normal;
+  color: #fff;
+  font-size: 0.9em;
+  background: #374158;
+  height: 40px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.datapp b:nth-child(1){
+  display: flex;
+  align-items: center;
+  font-family: "GlacialR";
+  font-weight: normal;
+  color: #fff;
+  font-size: 0.9em;
+  background: #374158;
+  height: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.datapp i {
+  font-style: normal;
+  font-family: "Aleo", Sans-Serif;
+  margin-left: 10px;
+  color: #000;
+  background: #fff;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+.content-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  background: #fff;
+  border-radius: 8px;
+  width: 100%;
+  padding-right: 10px;
+}
+
+.title3 i {
+  font-family: "GlacialR";
+  font-style: normal;
+  color: 	#696969;
+  font-size: 0.95em;
+}
+
+.note {
+  border-right: 1px solid #4f4f4f;
+  border-left: 1px solid #4f4f4f;
+  padding: 0px 15px;
+}
+.title3 {
+  display: flex;
+  flex-direction: column;
+}

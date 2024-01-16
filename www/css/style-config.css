@@ -33,8 +33,8 @@ body {
   }
   
   button:hover {
-    transform: scale(0.8);
-    transition: all 0.4s;
+    transform: scale(0.95);
+    transition: all 0.1s;
   }
   
   .no {
@@ -79,11 +79,8 @@ body {
   .center {
     width: 100%;
     box-sizing: border-box;
-    margin-left: auto;
-    margin-right: auto;
     text-align: left;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 10px;
   }
   
   h2 {
@@ -199,16 +196,20 @@ body {
 }
 
 .permitions .title b {
-  font-family: "Avant", sans-serif;
-  font-size: 1.3em;
-  margin-bottom: 25px;
+  font-family: "GlacialR", sans-serif;
+  font-size: 1.7em;
 }
 
 .horizon {
   display: flex;
   flex-direction: row;
   margin-top: 30px;
-  padding-bottom: 25px;
+  background: #fff;
+    border: 1px solid #ccc;
+    box-shadow:  6px 6px 12px #f2f2f2,
+             -6px -6px 12px #ffffff;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .horizon b {
@@ -217,16 +218,23 @@ body {
   margin-right: auto;
 }
 
+.horizon:hover {
+    background: rgb(245, 245, 245);
+    transform: scale(0.98);
+    transition: all 0.1s;
+}
+
 .under-box {
   margin-top: 30px;
   border-top: solid 1px #ccc;
+  width: auto;
+  padding: 5px;
   padding-top: 25px;
 }
 
 .under-box .title b {
-  font-family: "Avant", sans-serif;
-  font-size: 1.3em;
-  margin-bottom: 5px;
+   font-family: "GlacialR", sans-serif;
+  font-size: 1.7em;
 }
 
 .under-box button {
@@ -236,7 +244,7 @@ body {
   background: #000;
   color: #fff;
   font-family: "GlacialR", sans-serif;
-  font-size: 1.0em;
+  font-size: 1.3em;
   border-radius: 5px;
   border: none;
   margin-top: 20px;
@@ -295,4 +303,37 @@ background: linear-gradient(0deg, rgba(0,0,0,1) 10%, rgba(0,3,242,1) 100%);
 
 #cba {
   width: 200px;
+}
+
+.permitions:nth-child(3) {
+  margin-top: 50px;
+  border-top: solid 1px #ccc;
+  width: auto;
+  padding: 5px;
+  padding-top: 25px;
+}
+
+.permitions:nth-child(3) .horizon {
+    display: flex;
+    align-items: center;
+}
+
+.permitions:nth-child(3) .horizon button {
+    background: none;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 5px;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+box-shadow:  6px 6px 12px #f2f2f2,
+             -6px -6px 12px #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.permitions:nth-child(3) .horizon button img {
+    width: 23px;
 }

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,10 +10,225 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="./components/conexao.js"></script>
     <title>Meus relatos</title>
 </head>
 <body>
-  
+
+<script>
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    const uid = user.uid;
+    const colecaoRelatosSalvos = firebase.firestore().collection('usuarios').doc(uid).collection('relatosSalvos');
+    const contenedorDeRelatos = document.getElementById('relato');
+
+    colecaoRelatosSalvos.get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const relatoSalvoUID = doc.id;
+
+          const relatoOriginalRef = firebase.firestore().collection('usuarios').doc(uid).collection('relato').doc(relatoSalvoUID);
+
+          relatoOriginalRef.get()
+            .then((relatoDoc) => {
+              const data = relatoDoc.data();
+if (data && data.cidade) {
+              const cidade = data.cidade;
+              const timestamp = data.dataHora.toDate();
+              const dia = timestamp.toLocaleDateString('pt-BR', { year: 'numeric', month: 'numeric', day: 'numeric' });
+              const hora = timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+              const nome = data.nome.substr(0, 6); 
+              const relato = data.relato;
+              const tipoCrime = data.tipoCrime;
+              const tipoCrimes = tipoCrime.join(', ');
+
+              const divDoRelato = document.createElement('div');
+              divDoRelato.innerHTML = `
+ <div id="${cidade}" class="conteudo-relato">
+       
+       <div class="loc">
+         <img src="./ICONS/loc.png">
+         <i class="localization">${cidade}</i>
+       </div>
+       
+       
+   <div class="box-relato">
+     <div class="title-relato">
+       <div class="box-u">
+       <b>#${nome}</b>
+       <i>${dia} <b> • </b><strong>${hora}</strong></i>
+       </div>
+       <div class="security">
+       <button class="saved"><img src="./ICONS/salved.png"></button>
+       
+<button class="dd" onclick="altIcon2(this)"><img id="savedImage2" src="./ICONS/outflag.png"></button></div>
+     </div>
+                 <div class="line-h"></div>
+     <center>
+          <div class="text">
+                      <div class="idf_align">
+                        <div class="idf">
+                        </div>
+                        <div class="idf2">
+                          <div class="icn"><img src="./ICONS/crime.png"></div>
+                          <div class="txt_icn"><i>${tipoCrimes}</i></div>
+                        </div>
+                      </div>
+                   <section> ${relato}</section>
+     </center>
+                  <div class="line-h"></div>
+  <div class="coment">
+    <div class="coment-title">  
+      <img src="./ICONS/coment.png">
+        <b class="nm_coment">Comentários</b>
+        
+      <button class="close" onclick="close(this)"><img src="./ICONS/up.png"><b>Fechar</b></button>
+    </div>  
+        <div class="nav-coment-box">
+          <div class="nav-coment">
+            <button><textarea placeholder="Comentar"></textarea>
+  <div class="line-v1"></div>
+  <button><img src="./ICONS/send.png"></button>
+  </button>
+          </div>
+      </div>
+    <center><div class="line-x"></div></center>
+    <div id="comentario-box-${doc.id}" class="comentario-box">
+  </div>
+  </div>
+  <div class="comentario" onclick="coment(this)"><a>Comentários<b class="nm_coment2"></b></a></div>
+</div>
+</div>
+<br>
+              `;
+              contenedorDeRelatos.appendChild(divDoRelato);
+
+              
+              exibirComentariosDoRelato(uid, relatoSalvoUID);
+               } else {
+      console.log('O campo "cidade" não está presente no documento');
+    }
+  })
+            .catch((error) => {
+              console.error('Erro ao obter relato original: ', error);
+            });
+        });
+      })
+      .catch((error) => {
+        console.error('Erro ao obter relatos salvos: ', error);
+      });
+  } else {
+   
+});
+
+
+
+function adicionarComentario(uidUsuarioRelato, uidRelato, uidUsuarioComentario, textoComentario) {
+  const dataHora = new Date();
+  const comentario = {
+    uidUsuario: uidUsuarioComentario,
+    texto: textoComentario,
+    dataHora: dataHora
+  };
+
+  const relatoRef = firebase.firestore().collection('usuarios').doc(uidUsuarioRelato).collection('relato').doc(uidRelato);
+
+  relatoRef.update({
+    comentarios: firebase.firestore.FieldValue.arrayUnion(comentario)
+  })
+  .then(() => {
+    console.log('Comentário adicionado com sucesso!');
+    exibirComentariosDoRelato(uidUsuarioRelato, uidRelato)
+  })
+  .catch((error) => {
+    console.error('Erro ao adicionar comentário:', error);
+  });
+}
+
+function enviarComentario(botaoEnviar, uidRelato, uidUsuarioRelato) {
+  const uidUsuarioComentario = firebase.auth().currentUser.uid;
+  const textoComentario = botaoEnviar.parentElement.querySelector('textarea').value;
+  botaoEnviar.parentElement.querySelector('textarea').value = '';
+
+  adicionarComentario(uidUsuarioRelato, uidRelato, uidUsuarioComentario, textoComentario);
+}
+
+function exibirComentariosDoRelato(uidDoUsuario, uidRelato) {
+  const relatoRef = firebase.firestore().collection('usuarios').doc(uidDoUsuario).collection('relato').doc(uidRelato);
+
+  relatoRef.get()
+    .then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        const comentarios = data.comentarios || [];
+
+        const comentarioBoxId = `comentario-box-${uidRelato}`;
+        const contenedorDeComent = document.getElementById(comentarioBoxId);
+        contenedorDeComent.innerHTML = '';
+
+        comentarios.forEach((comentario) => {
+          const texto = comentario.texto;
+          const uidUsuario = comentario.uidUsuario.substr(0, 6);
+          const timestamp = comentario.dataHora.toDate();
+          const dtDia = timestamp.toLocaleDateString('pt-BR', { year: 'numeric', month: 'numeric', day: 'numeric' });
+          const dtHora = timestamp.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+          const divDoComentario = document.createElement('div');
+          divDoComentario.innerHTML = `
+            <div class="text-coment">
+              <div class="title-div-coment">
+                <div class="box-c">
+                  <b>#${uidUsuario}</b>
+                  <i>${dtDia} <b> • </b><strong>${dtHora}</strong></i>
+                </div>
+                <div class="security-coment">
+                  <button class="saved" onclick="altIcon3(this)"><img src="./ICONS/flagout.png"></button>
+                </div>
+              </div>
+              <div class="coment-text">
+                <u>${texto}</u>
+              </div>
+              <center><div class="line-coment"></div></center>
+            </div>
+          `;
+          contenedorDeComent.appendChild(divDoComentario);// Criação do HTML para exibir cada comentário
+          // ...
+        });
+      } else {
+        console.log('Nenhum documento encontrado para o relato');
+      }
+    })
+    .catch((error) => {
+      console.error('Erro ao obter relato:', error);
+    });
+}
+
+
+function removerDocumentoSalvo(docId) {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      const uidDoUsuario = user.uid;
+      const usuarioRef = firebase.firestore().collection('usuarios').doc(uidDoUsuario);
+      const relatosSalvosRef = usuarioRef.collection('relatosSalvos').doc(docId);
+
+      relatosSalvosRef.delete()
+        .then(() => {
+          console.log('Documento removido com sucesso');
+        })
+        .catch((error) => {
+          console.error('Erro ao remover o documento salvo: ', error);
+        });
+    }
+  });
+}
+
+</script>
+
+
+
    <div class="nav-box-b">
     <a href="meusrelatos.html"><button class="oo1" >MEUS RELATOS</button></a>
     <a><button class="oo2" style="background: #ebe6e6;">RELATOS SALVOS</button></a>
@@ -21,145 +237,16 @@
  
  <div class="title-rel">
    <div class="align">
-     <button onclick="redirect()"><img src="./ICONS/exit_.png"></button>
+     <button onclick="redirect('relatos.html')"><img src="./ICONS/exit_.png"></button>
           
      <div class="align-2">
-     <button><img src="./ICONS/insights.png"></button>
      <button><img src="./ICONS/info.png"></button>
     </div>
    </div>
  </div>
  
- <div class="relato">
-   <div class="center">
-     <div class="conteudo-relato">
-       
-       <div class="loc">
-         <img src="./ICONS/loc.png">
-         <i class="localization">Mongaguá</i>
-       </div>
-       
-       
-   <div class="box-relato">
-     <div class="title-relato">
-       <div class="img-box"><img src="./IMG/person.png"></div>
-       <div class="box-u">
-       <b>Usuário anônimo</b>
-       <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-       </div>
-       <div class="security">
-       <button class="saved"><img src="./ICONS/salved.png"></button>
-       
-<button class="dd" onclick="altIcon2(this)"><img id="savedImage2" src="./ICONS/outflag.png"></button></div>
-     </div>
-                 <div class="line-h"></div>
-     <center>
-          <div class="text">
-                   <section> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</section>
-     </center>
-                  <div class="line-h"></div>
-  <div class="coment">
-    <div class="coment-title">  
-      <img src="./ICONS/coment.png">
-        <b class="nm_coment">0</b>
-        
-      <button class="close" onclick="close(this)"><img src="./ICONS/up.png"><b>Fechar</b></button>
-    </div>  
-        <div class="nav-coment-box">
-          <div class="nav-coment">
-            <button><textarea placeholder="Comentar"></textarea>
-  <div class="line-v1"></div>
-  <button><img src="./ICONS/send.png"></button>
-  </button>
-          </div>
-      </div>
-    <center><div class="line-x"></div></center>
-    <div class="comentario-box">
-      <div class="text-coment">
-        <div class="title-div-coment">
-          <div class="img-box"><img src="./IMG/person.png"></div>
-       <div class="box-c">
-       <b>Usuário anônimo</b>
-       <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-          </div>
-           <div class="security-coment">
-       <button class="saved" onclick="altIcon3(this)"><img src="./ICONS/flagout.png"></button>
-   </div>
-        </div>
-        <div class="coment-text">
-         <u>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</u></div>
-      <center><div class="line-coment"></div></center>
-      </div>
-       <div class="text-coment">
-        <div class="title-div-coment">
-          <div class="img-box"><img src="./IMG/person.png"></div>
-       <div class="box-c">
-       <b>Usuário anônimo</b>
-       <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-          </div>
-           <div class="security-coment">
-       <button class="saved" onclick="altIcon3(this)"><img src="./ICONS/flagout.png"></button>
-   </div>
-        </div>
-        <div class="coment-text">
-         <u>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</u></div>
-      <center><div class="line-coment"></div></center>
-      </div>
-  </div>
-  </div>
-  <div class="comentario" onclick="coment(this)"><a>Comentários: <b class="nm_coment2">0</b></a></div>
-</div>
-</div>
-
-     
-
-     <div class="conteudo-relato">
-              <div class="loc">
-         <img src="./ICONS/loc.png">
-         <i class="localization">Praia Grande</i>
-       </div>
-   <div class="box-relato">
-     <div class="title-relato">
-       <div class="img-box"><img src="./IMG/person.png"></div>
-       <div class="box-u">
-       <b>Usuário anônimo</b>
-       <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-       </div>
-       <div class="security">
-       <button class="saved"><img src="./ICONS/salved.png"></button>
-       
-<button class="dd" onclick="altIcon2(this)"><img id="savedImage2" src="./ICONS/outflag.png"></button></div>
-     </div>
-                 <div class="line-h"></div>
-     <center>
-          <div class="text">
-                   <section>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</section>
-     </center>
-                  <div class="line-h"></div>
-  <div class="coment">
-    <div class="coment-title">  
-      <img src="./ICONS/coment.png">
-        <b class="nm_coment">0</b>
-        
-      <button class="close" onclick="close(this)"><img src="./ICONS/up.png"><b>Fechar</b></button>
-    </div>  
-        <div class="nav-coment-box">
-          <div class="nav-coment">
-            <button><textarea placeholder="Comentar"></textarea>
-  <div class="line-v1"></div>
-  <button><img src="./ICONS/send.png"></button>
-  </button>
-          </div>
-      </div>
-    <center><div class="line-x"></div></center>
-    <div class="comentario-box">
-      
-  </div>
-  </div>
-  <div class="comentario" onclick="coment(this)"><a>Comentários: <b class="nm_coment2">0</b></a></div>
-</div>
-</div>
+ <div  class="relato">
+   <div id="relato" class="center">
 
 
 

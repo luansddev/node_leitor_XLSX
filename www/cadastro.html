@@ -5,14 +5,130 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/notification.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
     <title>Cadastro</title>
 </head>
 <body>
-  <div class="slide">
 
+    <script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAkBkdWs_5vJChmZBesM2Ub8CnOFeXNuI0",
+  authDomain: "gryfo-app.firebaseapp.com",
+  projectId: "gryfo-app",
+  storageBucket: "gryfo-app.appspot.com",
+  messagingSenderId: "16245879118",
+  appId: "1:16245879118:web:4c8dd698305826cb7d2e1f"
+};
+  const app = firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore(app);
+  const auth = firebase.auth(app);
+
+  db.collection("relatos")
+    .get()
+    .then((querySnapshot) => {
+      console.log("Conexão com o Firestore bem-sucedida.");
+    })
+    .catch((error) => {
+      console.error("Erro na conexão com o Firestore:", error);
+    });
+
+    function onChangeEmail() {
+    toggleEmailErrors();
+    checkEmailAvailability();
+}
+
+function toggleEmailErrors() {
+    const email = document.getElementById("email").value;
+    if (validateEmail(email)) {
+        document.getElementById("email-invalid").style.display = "none";
+    } else {
+        document.getElementById("email-invalid").style.display = "block";
+    }
+}
+
+function checkEmailAvailability() {
+  const email = document.getElementById("email").value;
+
+  if (!email) {
+    return;
+  }
+
+  firebase.auth().fetchSignInMethodsForEmail(email)
+    .then((signInMethods) => {
+      if (signInMethods && signInMethods.length > 0) {
+        document.getElementById("email-registered").style.display = "block";
+      } else {
+        document.getElementById("email-registered").style.display = "none";
+      }
+    })
+    .catch((error) => {
+     
+    });
+}
+
+function isEmailValid() {
+  const email = document.getElementById("email").value;
+  if (!email) {
+    return false;
+  }
+  return validateEmail(email);
+}
+
+function validateEmail(email) {
+  return /\S+@\S+\.\S+/.test(email);
+}
+
+
+   
+
+
+const mensagem = document.getElementById("mensagem-not");
+
+function signUpWithEmailAndPassword() {
+    const nome = document.getElementById("nome").value;
+    const cpf = document.getElementById("cpf").value;
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
+
+    if (nome && cpf && isEmailValid() && senha) {
+
+        auth
+            .createUserWithEmailAndPassword(email, senha)
+            .then((userCredential) => {
+                userCredential.user.sendEmailVerification();
+
+                db.collection("usuarios")
+                    .doc(userCredential.user.uid)
+                    .set({
+                        nome: nome,
+                        cpf: cpf,
+                        email: email,
+                    })
+                    .then(() => {
+                        window.location.href = "login.html";
+                    })
+                    .catch((error) => {
+                        console.error("Erro ao adicionar dados ao Firestore: ", error);
+                    });
+            })
+            .catch((error) => {
+                console.error("Erro ao criar conta: ", error);
+            });
+    } else {
+        console.error("Preencha todos os campos corretamente.");
+    }
+}
+
+
+
+</script>
+  <div class="slide">
     <div class="jesus">
     <div class="box-logo">
         <button onclick="redirect('introduct.html')"><img src="./ICONS/exit_.png"></button>
@@ -22,81 +138,78 @@
 
     <div class="space-conteudo">
         <div id="conteudocd">
-            <h2>Bem-vindo ao Gryfo!</h2>
-
-
-
-            
-           
+            <h2>Bem-vindo ao Gryfo!</h2>     
             <div class="ddpessoal">
   <div class="mama">
-                <form action="control.php" method="GET"></form>
+                <form action="" method="GET"></form>
                 
                 <div class="input-group">
-  <input required="" type="text" name="nome" autocomplete="off" class="input">
-  <label class="user-label">Nome</label>
+  <input id="nome"required="" type="text" name="nome" autocomplete="off" class="input">
+  <label for="nome" class="user-label">Nome</label>
 </div>
+<div class="error" id="cpf-invalid">CPF inválido!</div>
 
                 <div class="input-group">
-  <input required="" type="number" name="cpf" autocomplete="off" class="input">
-  <label class="user-label">CPF</label>
+  <input id="cpf" required="" type="text" name="cpf" autocomplete="off" class="input" oninput="mascara(this)">
+  <label for="cpf" class="user-label">CPF</label>
 </div>
 
-<div class="input-group">
-  <input required="" type="number" name="cel" autocomplete="off" class="input">
-  <label class="user-label">Número de celular</label>
-</div>
+<!--<div class="input-group">
+  <input id="num-cel"  required="" type="tel" name="cel" autocomplete="off" class="input" maxlength="15" pattern="\(\d{2}\)\s*\d{5}-\d{4}">
+  <label for="num-cel" class="user-label">Número de celular</label>
+</div>-->
 
+<div class="error-1" id="email-invalid">E-mail inválido!</div>
+<div class="error-1" id="email-registered">Este e-mail já está em uso!</div>
 <div class="input-group">
-  <input required="" type="email" name="email" autocomplete="off" class="input" id="email">
-  <label class="user-label">Email</label>
-</div>
-                  
-                    
-<button onclick="abrir()">Próximo</button>
+  <input id="email" required="" type="text" name="email" autocomplete="off" class="input" oninput="onChangeEmail()" >
+  <label for="email" class="user-label">E-mail</label>
+</div> 
+<div class="error-1" id="email-null">*Preencha todos os campos!</div>      
+                    <!--signUpWithEmailAndPassword()-->
+
+<button id="nextButton" onclick="abrir(this)">Próximo</button>
 </div>     
                     
-                    
+                <!--<i id="">Enviamos um email de verificação para <u id="codigoVerificacao"></u>, confirme-o para criar a sua conta e acessar o aplicativo</i>-->    
 <div class="sgt">
-    <i>Enviamos um código de verificação de 6 digitos para o e-mail <u id="codigoVerificacao"></u>, insira-o a baixo:</i>
-                      <br>
-                      <br>
-                      <br>
-<div class="input-group">
-  <input required="" type="number" name="cd" autocomplete="off" class="input">
-  <label class="user-label">Código de verificação</label>
-</div>
- 
- <div class="ug">                     
-<button onclick="retur()"><img src="./ICONS/undo.png">Anterior</button>                    
-
-  <button onclick="abrir2(this)" class="btll">Próximo</button>
-</a>
-</div>
-</div>
-                      
-                      
-                      
-                      <div class="sgt2">
-                        <i>Agora crie uma senha para a sua conta</i>
+    <i>Agora crie uma senha para a sua conta</i>
                         <br>
                         <br>
                         <br>
            <div class="input-group">
-  <input required="" type="password" name="senha" autocomplete="off" class="input">
+  <input id="senha2" required="" type="password" name="senha" autocomplete="off" class="input">
   <label class="user-label">Senha</label>
 </div>
              
            <div class="input-group">
-  <input required="" type="password" name="senha2" autocomplete="off" class="input">
+  <input id="senha" required="" type="password" name="senha" autocomplete="off" class="input">
   <label class="user-label">Confirmação de senha</label>
 </div>
                         <div class="ug">
-                          <button onclick="retur2()"><img src="./ICONS/undo.png">Anterior</button>
+                          <button onclick="retur()"><img src="./ICONS/undo.png">Anterior</button>
                           
-       <button style="background:blue;border:none;"onclick="redirect('regiao.html')"><img src="./ICONS/cad.png">Cadastrar-se</button>
+       <button id="nextButton" onclick="abrir3(this)">Próximo</button>
                          </div>
-                         
+</div>    
+                                        <div class="sgt3">
+                      <i>Para garantir o pleno funcionamento do Gryfo, gostaríamos de solicitar a permissão para acessar a localização do seu smartphone. Caso opte por não conceder essa permissão, ainda poderá utilizar o aplicativo sem problemas; entretanto, algumas funcionalidades estarão restritas.</i>
+                                              <div class="ug">
+                          <button style="background:blue;border:none;color:#fff;" onclick="geolocation()"><img src="./ICONS/locon.png">Permitir localização</button>
+                          
+       <button onclick="abrir4()"><img src="./ICONS/locoff.png">Não permitir</button>
+                         </div>
+                    </div>
+                    <div class="sgt2">
+                       <i id="">Para finalizar, precisamos enviar um email de verificação para <u id="codigoVerificacao"></u>.</i> 
+                        <div class="ug2">
+                         <button onclick="signUpWithEmailAndPassword()">Enviar e-mail</button>
+                         <div id="mensagem-not">
+                             <div class="box-validation">
+                                 <b>E-mail enviado, confirme-o para criar a sua conta e acessar o aplicativo.</b>
+                             </div>
+                         </div>
+                         </div>
                     </div>
                     <div class="center">
                         
@@ -113,16 +226,4 @@
       </div>
     <script src="./components/script.js"></script>
 </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
+</html>  

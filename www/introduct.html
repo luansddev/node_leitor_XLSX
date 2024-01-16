@@ -8,13 +8,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
-    
+        <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
     <title>Cadastro</title>
     <script src="lib/jquery-3.7.0.min.js"></script>
     <script src="components/plugins.js"></script>
     <script src="./JS/script.js"></script> 
+    <script src="./components/conexao.js"></script>
 </head>
-<!--pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w--!>
+    <script>
+
+        auth.onAuthStateChanged((user) => {
+            if (user && user.emailVerified) {
+                window.location.href = "regiao.html";
+            }
+        });
+
+        function autenticarAnonimamente() {
+  auth.signInAnonymously()
+    .then(() => {
+      console.log("Autenticação anônima bem-sucedida.");
+      window.location.href = "regiaoAnon.html";
+    })
+    .catch((error) => {
+      console.error("Erro ao entrar anonimamente:", error);
+    });
+}
+
+</script>
 <body>
     <div class="box-logo">
         <img src="./IMG/gryfop.png" alt="Logo Gryfo" class="logo">
@@ -25,11 +47,20 @@
     </div>
 
     <div class="out">
-       <button id="log" onclick="redirect('cadastro.html')"><img src="./IMG/google.avif">Continuar com Google</button>
+        <button id="cad" onclick="redirect('cadastro.html')"><img src="./ICONS/yesacont.png">Criar conta</button>
     
        <div class="align"><div class="line"></div><b id="o">ou</b><div class="line"></div></div>
-    
-       <button id="cad" onclick="redirect('cadastro.html')">Criar conta</button>
+       <div class="ali"><button id="log" onclick="autenticarAnonimamente()">Continuar como visitante</button><div class="info" onclick="opendiv()"><img src="./ICONS/helpp.png"></div></div>
+       <div class="list_info">
+        <div class="info_list">
+            <b>&#9432 Ao continuar como visitante: </b>
+            
+            <i> * Seus dados não serão <u>armazenados</u> no aplicativo.</i>
+            <i> * Você não poderá <u>criar</u> e nem <u>salvar</u> relatos.</i>
+            <i> * Você não receberá <u>notificações</u> do aplicativo.</i>
+            <i> * Você não poderá usar a função de <u>salvar locais</u>.</i>
+        </div>
+        </div>
        <p>Ao se inscrever, você concorda com nossos <a href="">Termos</a> e a <a href="">Política de Privacidade</a>.</p></i>
 </div>
     <div class="out-2">
@@ -37,6 +68,12 @@
     
     </div>
     <script src="./components/script.js"></script>
+    <script>
+        function opendiv() {
+    const content = document.querySelector('.list_info');
+    content.classList.toggle("aberta");
+}
+    </script>
 </body>
 </html>
 

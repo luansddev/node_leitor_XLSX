@@ -44,7 +44,7 @@ body {
   text-decoration: none;
   color: #000;
   font-family: "Avant", Sans-Serif;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 @keyframes up1 {
@@ -163,10 +163,19 @@ body {
 
 .slide {
   margin-top: 40px;
-  margin-bottom: 190px;
   opacity: 0;
   animation-name: slide;
-  animation-duration: 1s;
+  animation-duration: 1.2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+.slide-1 {
+  margin-top: 10px;
+  opacity: 0;
+  animation-name: slide;
+  animation-duration: 1.2s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-timing-function: ease-out;
@@ -185,15 +194,16 @@ body {
   display: flex;
   align-items: center;
   padding-top: 50px;
+  padding-left: 5px;
 }
 
 h2 {
-  font-family: "Glacial", Sans-Serif;
+  font-family: "GlacialR", Sans-Serif;
   font-size: 1.3em;
 }
 
 .relato {
-  margin-top: 100px;
+  margin-bottom: 200px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -223,17 +233,6 @@ h2 {
   margin-bottom: 10px;
 }
 
-.img-box {
-  background: #fff;
-  width: 40px;
-  height: 40px;
-  border-radius: 3px;
-}
-
-.img-box img {
-  width: 100%;
-}
-
 .box-u {
   margin-left: 10px;
   display: flex;
@@ -243,11 +242,14 @@ h2 {
 .security {
   margin-left: auto;
   margin-top: 10px;
-  margin-right: 20px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .security button img:last-child {
-  width: 30px;
+  width: 25px;
   margin: 0;
 }
 
@@ -258,7 +260,7 @@ h2 {
 }
 
 .text {
-  padding: 30px 10px 30px 10px;
+  padding: 15px 10px 30px 10px;
   background: #fcfcfc;
   margin: 0;
   z-index: 2;
@@ -292,7 +294,7 @@ h2 {
 
 .box-u b {
   font-family: "GlacialR", Sans-Serif;
-  font-size: 1.1em;
+  font-size: 0.9em;
   color: #fff;
 }
 
@@ -408,11 +410,10 @@ h2 {
   width: 80%;
   height: 40px;
   background: none;
-  display: flex;
-  justify-content: space-around;
   align-items: center;
   display: flex;
   justify-content: space-around;
+  margin-top: 20px;
 }
 
 .nav-coment button {
@@ -447,7 +448,7 @@ h2 {
 .nav-coment button textarea {
   padding: 6px 10px;
   font-family: "GlacialR", Sans-Serif;
-  font-size: 1.2em;
+  font-size: 1.1em;
   margin-left: 5px;
   margin-right: 10px;
   width: 100%;
@@ -456,6 +457,11 @@ h2 {
   border: solid 1px #ccc;
   border-radius: 5px;
   outline: none;
+}
+
+.nav-coment button textarea:hover {
+  height: 50px;
+  transition: all 0.2s;
 }
 
 .nav-coment button:hover {
@@ -552,20 +558,13 @@ h2 {
 .title-div-coment {
   margin: 30px 20px 0px 20px;
   padding-bottom: 0;
-  padding-left: 10px;
   justify-content: left;
   align-items: center;
   display: flex;
   height: 70px;
 }
 
-.title-div-coment .img-box {
-  width: 30px;
-  height: 30px;
-}
-
 .box-c {
-  margin-left: 10px;
   display: flex;
   flex-direction: column;
 }
@@ -620,23 +619,10 @@ h2 {
 }
 
 .conteudo-relato {
-  padding-bottom: 70px;
-  padding-top: 70px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: solid 1px #e6e6e6;
+  padding-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid rgb(189, 185, 185);
 }
-
-.conteudo-relato:nth-child(1) {
-  padding-top: 0px;
-}
-
-.conteudo-relato:last-child {
-  padding-bottom: 0px;
-  border-bottom: none;
-}
-
 
 .nav-relato-b {
   position: fixed;
@@ -658,11 +644,11 @@ h2 {
 
 .nav-relato-b button {
   background: none;
-  border: solid 2px #000;
+  border: solid 1px #000;
   width: 340px;
   height: 50px;
   border-radius: 6px;
-  font-family: "Glacial", Sans-Serif;
+  font-family: "GlacialR", Sans-Serif;
   font-size: 0.9em;
   align-items: center;
   padding: 0;
@@ -835,12 +821,63 @@ h2 {
   display: none;
 }
 
-/* .center
+.idf {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin-bottom: 10px;
+  align-items: start;
+}
 
-.box-relato
+.icn img {
+  width: 18px;
+}
 
-.box-u
+.txt_icn i {
+  font-family: "GlacialR";
+  font-size: 1.0em;
+  color: #0a8f0a;
+  margin-left: 5px;
+  font-style: normal;
+}
 
-.security
+.idf2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin-bottom: 10px;
+  align-items: start;
+}
 
-.coment
+.idf2 .txt_icn i{
+  font-family: "GlacialR";
+  font-size: 0.8em;
+  color: #000;
+  margin-left: 5px;
+  font-style: normal;
+}
+
+@keyframes ld {
+  0% {
+    right: 30px;
+    opacity: 0;
+  }
+  100% {
+    right: 0px;
+    opacity: 1;
+  }
+}
+
+.txt_icn {
+  position: relative;
+  right: 30px;
+  animation-name: ld;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.idf_align {
+    display: flex;
+    flex-direction: column;
+}

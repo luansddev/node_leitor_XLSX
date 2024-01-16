@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,14 +9,103 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+        <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="./components/conexao.js"></script>
     <title>Alterar e-mail</title>
 </head>
 <body>
+      <script>
+
+
+function verificarSenha() {
+    const password = document.getElementById("password").value;
+    const user = auth.currentUser;
+
+    if (user) {
+        const credential = firebase.auth.EmailAuthProvider.credential(
+            user.email,
+            password
+        );
+
+        user.reauthenticateWithCredential(credential)
+            .then(() => {
+                abrirVerification();
+            })
+            .catch((error) => {
+                const erroPass = document.querySelector('.msg-erro');
+                erroPass.style.display = 'block';
+            });
+    } else {
+        console.error("Usuário não autenticado.");
+    }
+}
+
+
+        function mudarEmail() {
+            const novoEmail = document.getElementById("email").value;
+            const user = auth.currentUser;
+
+            if (user) {
+       
+                user.updateEmail(novoEmail)
+                    .then(() => {
+         
+                        const userId = user.uid;
+                        const userData = {
+                            email: novoEmail,
+                  
+                        };
+
+                        db.collection("usuarios")
+                            .doc(userId)
+                            .update(userData)
+                            .then(() => {
+               
+                                user.sendEmailVerification()
+                                    .then(() => {
+                       
+                                        abrirEnd();
+                                    })
+                                    .catch((error) => {
+                                        console.error("Erro ao enviar email de verificação: ", error);
+                                    });
+                            })
+                            .catch((error) => {
+                                console.error("Erro ao atualizar o email no Firestore: ", error);
+                            });
+                    })
+                    .catch((error) => {
+                        console.error("Erro ao atualizar o email: ", error);
+                    });
+            } else {
+                console.error("Usuário não autenticado.");
+            }
+        }
+
+        function abrirVerification() {
+      
+            document.getElementById("verification").style.display = "block";
+ document.getElementById("pass").style.display = "none";
+        }
+
+function abrirEnd() {
+
+    document.getElementById("end").style.display = "block";
+   document.getElementById("verification").style.display = "none";
+ document.getElementById("pass").style.display = "none";
+    setTimeout(function () {
+        window.location.href = "conta.html";
+    }, 5000); 
+}
+
+    </script>
 <div class="slide"> 
     <div class="align">
     <div class="title-rel">
         <div class="align">
-          <button onclick="redirect('conta.html')"><img src="./ICONS/exit_.png"></button>
+          <button onclick="redirect('configuracao.html')"><img src="./ICONS/exit_.png"></button>
         </div>
       </div>
     </div>
@@ -31,35 +121,38 @@
   <div class="align">
 
 
-    <div class="pass">
+    <div id="pass" class="pass">
     <div class="input-group">
-      <input required="" type="password" name="Senha" autocomplete="off" class="input">
+      <input id="password" required="" type="password" name="Senha" autocomplete="off" class="input">
       <label class="user-label">Digite sua senha</label>
     </div>
+    <div class="msg-erro" style="display: none;">
+  <b> &#9432 Senha incorreta.</b>
+</div>
+<br>
+
     <a href="esquecisenha.html" class="senha">Esqueci minha senha</a>
     <div class="un">
-    <button onclick="abrir2()">Avançar</button>
+    <button onclick="verificarSenha()">Avançar</button>
   </div>
     </div>
 </div>
 <div class="align">
-    <div class="verification">
+    <div id="verification" class="verification">
       <div class="input-group">
         <input required="" type="email" name="email" autocomplete="off" class="input" id="email">
         <label class="user-label">Digite o novo email</label>
       </div>
       <div class="un"> 
-      <button onclick="abrir3()">Avançar</button>   
+      <button onclick="mudarEmail()">Avançar</button>   
     </div>
     </div>
    </div> 
 
 
-    <div class="end">
+    <div id="end" class="end">
       <div class="input-group">
-        <p>Enviamos um código de verificação para o email <u id="codigoVerificacao"></u>.</p>
-        <input required="" type="password" name="Senha" autocomplete="off" class="input">
-        <label class="user-label">Digite o código</label>
+        <p>Enviamos um e-mail de verificação para <u id="codigoVerificacao"></u>, confirme-o para efetuar a alteração.</p>
       </div>
       <div class="ug">
         <button onclick="retur2()"><img src="./ICONS/undo.png">Anterior</button> 
@@ -70,5 +163,6 @@
 </div>   
  
  <script src="./components/script-conta.js"></script>
+ <script src="./components/script.js"></script>
 </body>
-</htlm>
+</html>

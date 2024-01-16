@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'Avant';
+  src: url('../FONTS/AvantGarde-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Glacial';
+  src: url('../FONTS/GlacialIndifference-Bold.woff');
+}
+
+@font-face {
+  font-family: 'GlacialR';
+  src: url('../FONTS/GlacialIndifference-Regular.woff');
+}
+
+.notification {
+    display: none;
+}

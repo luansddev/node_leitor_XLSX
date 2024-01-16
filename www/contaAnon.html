@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-conta.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+                <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="./components/conexao.js"></script>
+    <script src="./components/divs.js"></script>
+    <title>Conta</title>
+
+</head>
+<body>
+    <script>
+
+                firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+            }else{
+                            window.location.href = "introduct.html";
+            }
+        });
+        function logout() {
+  firebase.auth().signOut()
+    .then(() => {
+      window.location.href = "introduct.html";
+    })
+    .catch((error) => {
+      console.error("Erro no logout:", error);
+    });
+}
+
+
+    </script>
+
+    
+<div class="close" onclick="close()">
+  <div class="center">
+        <div class="slide">
+          <div class="title-conta">
+            <b>Conta</b>
+          </div>
+          <div class="anonymous-content-visible">
+        
+              <b>Você não está logado no Gryfo!</b>
+                <p>Crie um conta ou entre, caso já tenha uma:</p>
+                <div class="button-align">
+                <button onclick="redirect('cadastro.html')"><img src="./ICONS/yesacont.png">Criar conta</button>
+                <b>ou</b>
+                <button onclick="redirect('login.html')"><img src="./ICONS/login.png">Entrar</button>
+                </div>
+
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+<div class="nav-inferior">
+    <a href="regiaoAnon.html"><button class="icon"><img src="./ICONS/home2.png"></button></a>
+       <a href=""><button><img src="./ICONS/personn.png"></button></a>
+      <a href="configuracaoAnon.html"><button><img src="./ICONS/config2.png"></button></a>
+</div>
+</div>
+ <script src="./components/script-conta.js"></script>
+</body>
+</htlm>

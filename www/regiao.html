@@ -5,24 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style-menu.css">
+    <link rel="stylesheet" href="./css/load.css">
     <link rel="stylesheet" href="./css/style-data.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
-    <script src="./components/script-nav.js"></script>
     <script src="./components/loader.js"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="./components/conexao.js"></script>
+        <script src="./components/divs.js"></script>
+
     <title>Sua região</title>
 </head>
-<body onload="obterLocalizacao()">
+<body>
+<div class="gryfo_load">
+    <div class="or">
+          <div class="loading">
+      <div class="loading2">
+      <div class="ball1"></div>
+      <div class="ball2"></div>
+      <div class="ball3"></div>
+      </div>
+    </div>
+    <div class="load_img_box">
+    <img src="./IMG/gryfop.png">
+    </div>
+    <div class="txtload">
+     <b>Coletando os dados da sua região<span class="underscore">_</span></b>
+     <br>
+     <i>Esse processo pode durar alguns segundos.</i>
+     </div>
+    </div>
+</div>
+
+
     <div class="nav-box">
         <div class="nav-superior">
     <div class="nav-line"><a><button>Região</button></a>
       <div class="line"></div>
     </div>
-    <a href="relatos.html"><button>Relatos</button></a>
-    <a href="salvos.html"><button>Salvos</button></a>
+    
+    <a  href="relatos.html"><button>Relatos</button></a>
+    
+    <a href="salvos.html" class="anonymous-content"><button>Locais</button></a>
+    
   </div>
     </div>
 
@@ -36,6 +67,8 @@
         <div class="map-box">
             <div id="map"></div>
         </div>
+        <div id="dados-coletados">
+            </div>
     </div>
 
 <div class="slide2">
@@ -43,38 +76,111 @@
         <div id="dados">
             <div class="title2">
                 <b><h2>Dados da região</h2></b>
+                <h4>&#9432 Todos os dados abaixo, incluindo os de Produtividade Policial, são obtidos pela Secretaria de Segurança Pública do estado de São Paulo, e podem ser acessados a partir de <a href="https://www.ssp.sp.gov.br/">www.ssp.sp.gov.br.</a></h4>
             </div>
             </div>
-            <div class="table">
-               <div class="data" id="ccv">
-         <b>Crimes contra a vida</b>
-         
-         <div class="content">
-           
-          <b>Homicídio Doloso: <i id="hmd">0</i></b>
-          <b>Tentativa de Homicídio: <i id="tdh">0</i></b>
-          <b>Latrocínio: <i id="ltr">0</i></b>
-          <b>Homicídio Culposo por Acidente de Trânsito: <i id="hcat">0</i></b>
-          <b>Homicídio Doloso por Acidente de Trânsito: <i id="hdat">0</i></b>
-           
-         </div>
-       </div>
-       
-       <div class="data" id="ccif">
-         <b>Crimes contra a integridade física</b>
-       </div>
-       
-       <div class="data" id="ccp">
-         <b>Crimes contra o patrimônio</b>
-       </div>
-       
-       <div class="data" id="ccpsp">
-         <b>Crimes contra a propriedade e segurança pública</b>
-       </div>
+<div class="table">
+  
+  <div class="data ccv">
+    <b>Crimes contra a vida</b>
+    <div class="align-002">
+    <div class="content">
+      <b>Homicídio Doloso: <i id="homicidioDoloso">0</i></b>
+      <b>Homicídio culposo:<i id="homicidioCulposo">0</i></b>
+      <b>Tentativa de Homicídio: <i id="tentativaHomicidio">0</i></b>
+      <b>Latrocínio: <i id="latrocinio">0</i></b>
+      <b>Número de vítimas de latrocínio: <i id="nVitimasLatrocinio">0</i></b>
+      <b>Homicídio culposo por acidente de trânsito: <i id="homicidioCulposoAcidente">0</i></b>
+      <b>Homicídio doloso por acidente de trânsito: <i id="homicidioDolosoAcidente">0</i></b>
+      <b>Número de vítimas de homicídio doloso por acidente de trânsito: <i id="nVitimasHomicidioDolosoAcidente">0</i></b>
+    </div>
+    <div class="grafico-0">
+        <canvas id="myChart2" width="20" height="10"></canvas>
+        </div>
+    </div>
+    <div class="grafico">
+    <canvas id="myChart" width="20" height="10"></canvas>
+    </div>
+  </div>
+  
+  
+  
+  <div class="data ccif">
+    <b>Crimes contra a integridade física</b>
+    <div class="align-002">
+    <div class="content">
+      <b>Estupro: <i id="estupro">0</i></b>
+      <b>Estupro de vulnerável: <i id="estuproVulneravel">0</i></b>
+      <b>Total de estupro: <i id="totalEstupro">0</i></b>
+      <b>Lesão corporal dolosa: <i id="lesaoCorporal">0</i></b>
+      <b>Lesão corporal culposa: <i id="lesaoCorporalCulposa">0</i></b>
+      <b>Lesão corporal seguida de morte: <i id="lesaoCorporalMorte">0</i></b>
+    </div>
+    <div class="grafico-0">
+        <canvas id="myChart01" width="20" height="10"></canvas>
+        </div>
+    </div>
+    <div class="grafico">
+    <canvas id="myChart001" width="20" height="10"></canvas>
+    </div>
+  </div>
+  
+  
+  <div class="data ccp">
+    <b>Crimes contra o patrimônio</b>
+        <div class="align-002">
+    <div class="content">
+      <b>Roubo: <i id="roubo">0</i></b>
+      <b>Furto: <i id="furto">0</i></b>
+      <b>Roubo de veículo: <i id="rouboVeiculo">0</i></b>
+      <b>Furto de veículo: <i id="furtoVeiculo">0</i></b>
+    </div>
+    <div class="grafico-0">
+        <canvas id="myChart03" width="20" height="10"></canvas>
+        </div>
+    </div>
+    <div class="grafico">
+    <canvas id="myChart003" width="20" height="10"></canvas>
+    </div>
+  </div>
+  
+  
+  <div class="data ccpsp">
+    <b>Crimes contra a propriedade e segurança pública</b>
+        <div class="align-002">
+    <div class="content">
+      <b>Roubo a banco: <i id="rouboBanco">0</i></b>
+      <b>Roubo de carga: <i id="rouboCarga">0</i></b>
+    </div>
+    <div class="grafico-0">
+        <canvas id="myChart04" width="20" height="10"></canvas>
+        </div>
+    </div>
+    <div class="grafico">
+    <canvas id="myChart004" width="20" height="10"></canvas>
+    </div>
+  </div>
+
+
+<div class="title3">
+                <b><h2>Produtividade policial</h2></b>
+            <div class="note"><i>Note que nem sempre um aumento nos dados oficiais de criminalidade indica uma piora na segurança pública. Em locais onde há uma grande quantidade de crimes não notificados, esse aumento nos crimes notificados é, na verdade, considerado um indicador positivo de credibilidade e desempenho policial. Queremos que você tenha uma compreensão completa da situação da segurança pública em sua região. Portanto, além dos dados de criminalidade, também forneceremos informações sobre a produtividade policial. Isso ajudará a avaliar a eficácia das autoridades locais na aplicação da lei e na coleta de estatísticas precisas.</i></div>    
             </div>
-            <div id="_msg">
-                <i>*Os dados são atualizados mensalmente</i>
-            </div>
+            
+  <div class="datapp">
+    <div class="content-2">
+      <b>Nº DE INFRATORES APREENDIDOS EM FLAGRANTE: <i id="tdh">15</i></b>
+      <b>Nº DE INFRATORES APREENDIDOS POR MANDADO: <i id="tdh">17</i></b>
+      <b>Nº DE INFRATORES PRESOS EM FLAGRANTE: <i id="tdh">337</i></b>
+      <b>Nº DE INFRATORES PRESOS POR MANDADO: <i id="tdh">122</i></b>
+      <b>Nº DE PRISÕES EFETUADAS: <i id="tdh">414</i></b>
+      <b>Nº DE VEÍCULOS RECUPERADOS: <i id="tdh">131</i></b>
+    </div>
+  </div>
+
+
+</div>
+
         </div>
     </div>
 
@@ -82,7 +188,7 @@
         <div class="nav-line">
             <a href="regiao.html"><button class="icon"><img src="./ICONS/home.png"></button></a>
         </div>
-        <a href="notificacao.html"><button><img src="./ICONS/notificacao2.png"></button></a>
+        <a href="notificacao.html" class="anonymous-content2"><button><img src="./ICONS/notificacao2.png"></button></a>
         <a href="conta.html"><button><img src="./ICONS/persons.png"></button></a>
         <a href="configuracao.html"><button><img src="./ICONS/config2.png"></button></a>
     </div>
@@ -90,68 +196,384 @@
 
 
 
-     <script>
-            mapboxgl.accessToken = 'pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w';
-
-            const bounds = [
-                [-47.17238, -24.481404],
-                [-45.60648, -23.71610]
-            ];
-
-            const map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/theblessed/cljevk6l600bs01qpa2ma5zh5',
-                center: [-122.433247, 37.742646],
-                zoom: 2,
-                maxBounds: bounds
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w';
+  const bounds = [ [-53.372976, -25.335800], [-44.199839, -19.598577] ];
+  let cityName = '';
+  let cityNameScrapper = '';
+  
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/theblessed/clo37ffol00dg01p6d1hwgh7y',
+    center: [-47.889627, -15.780148],
+    zoom: 6,
+    maxBounds: bounds
+  });
+ 
+  document.addEventListener("DOMContentLoaded", function () {
+    var onSuccess = function (position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const customIcon = createCustomIcon();
+      const marker = new mapboxgl.Marker({ element: customIcon }).setLngLat([longitude, latitude]).addTo(map);
+      map.flyTo({ center: [longitude, latitude], zoom: 16 });
+      getCityName(latitude, longitude);
+    };
+ 
+    function onError(error) {
+      console.error('Error getting user location:', error.message);
+    }
+ 
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+ 
+    function createCustomIcon() {
+      const iconElement = document.createElement('div');
+iconElement.style.width = '10px';
+iconElement.style.height = '10px';
+iconElement.style.backgroundColor = '#0074D9';
+iconElement.style.border = '2px solid #FFFFFF';
+iconElement.style.borderRadius = '50%';
+      return iconElement;
+    }
+ 
+    function getCityName(latitude, longitude) {
+      const loadingDiv = document.querySelector('.gryfo_load');
+loadingDiv.style.display = 'block';
+ 
+fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?types=place&access_token=${mapboxgl.accessToken}`)
+        .then(response => response.json())
+        .then(data => {
+          cityName = data.features[0].text;
+          cityNameScrapper = removeSpecialCharsAndSpaces(cityName);
+          document.getElementById("local").textContent = cityName;
+          console.log(`Original City Name: ${cityName}`);
+          console.log(`Scrapped City Name: ${cityNameScrapper}`);
+ 
+fetch(`https://gryfo.000webhostapp.com/?cityName=${cityNameScrapper}`, { method: 'GET', mode: 'cors' })
+            .then(response => response.json())
+            .then(cityData => {
+                console.log(JSON.stringify(cityData));
+                
+                document.getElementById("homicidioDoloso").textContent = cityData.cityData[2];
+              console.log("Homicidio Doloso:", cityData.cityData[2]);
+ 
+              document.getElementById("homicidioCulposo").textContent = cityData.cityData[6];
+              console.log("Homicidio Culposo:", cityData.cityData[6]);
+ 
+              document.getElementById("tentativaHomicidio").textContent = cityData.cityData[7];
+              console.log("Tentativa de Homicidio:", cityData.cityData[7]);
+ 
+              document.getElementById("nVitimasLatrocinio").textContent = cityData.cityData[13];
+              console.log("Numero de Vitimas de Latrocinio:", cityData.cityData[13]);
+ 
+              document.getElementById("homicidioCulposoAcidente").textContent = cityData.cityData[5];
+              console.log("Homicidio Culposo por Acidente:", cityData.cityData[5]);
+ 
+              document.getElementById("homicidioDolosoAcidente").textContent = cityData.cityData[3];
+              console.log("Homicidio Doloso por Acidente:", cityData.cityData[3]);
+ 
+              document.getElementById("nVitimasHomicidioDolosoAcidente").textContent = cityData.cityData[4];
+              console.log("Numero de Vitimas de Homicidio Doloso por Acidente:", cityData.cityData[4]);
+ 
+              document.getElementById("estupro").textContent = cityData.cityData[15];
+              console.log("Estupro:", cityData.cityData[15]);
+ 
+              document.getElementById("estuproVulneravel").textContent = cityData.cityData[16];
+              console.log("Estupro Vulneravel:", cityData.cityData[16]);
+ 
+              document.getElementById("totalEstupro").textContent = cityData.cityData[14];
+              console.log("Total de Estupro:", cityData.cityData[14]);
+ 
+              document.getElementById("lesaoCorporal").textContent = cityData.cityData[9];
+              console.log("Lesao Corporal:", cityData.cityData[9]);
+ 
+              document.getElementById("lesaoCorporalCulposa").textContent = cityData.cityData[11];
+              console.log("Lesao Corporal Culposa:", cityData.cityData[11]);
+ 
+              document.getElementById("lesaoCorporalMorte").textContent = cityData.cityData[8];
+              console.log("Lesao Corporal com Morte:", cityData.cityData[8]);
+ 
+              document.getElementById("furto").textContent = cityData.cityData[22];
+              console.log("Furto:", cityData.cityData[22]);
+ 
+              document.getElementById("roubo").textContent = cityData.cityData[18];
+              console.log("Roubo:", cityData.cityData[18]);
+ 
+              document.getElementById("rouboVeiculo").textContent = cityData.cityData[19];
+              console.log("Roubo de Veiculo:", cityData.cityData[19]);
+ 
+              document.getElementById("furtoVeiculo").textContent = cityData.cityData[19];
+              console.log("Furto de Veiculo:", cityData.cityData[19]);
+ 
+              document.getElementById("rouboBanco").textContent = cityData.cityData[20];
+              console.log("Roubo a Banco:", cityData.cityData[20]);
+ 
+              document.getElementById("rouboCarga").textContent = cityData.cityData[21];
+              console.log("Roubo de Carga:", cityData.cityData[21]);
+ 
+              document.getElementById("latrocinio").textContent = cityData.cityData[12];
+              console.log("Latrocinio:", cityData.cityData[12]);
+            })
+            .catch(error => {
+              console.error('Error fetching city data:', error);
+            })
+            .finally(() => {
+loadingDiv.style.display = 'none';
             });
+        })
+        .catch(error => {
+          console.error('Error fetching location:', error);
+        })
+        .finally(() => {
+loadingDiv.style.display = 'none';
+        });
+    }
+ 
+    function removeSpecialCharsAndSpaces(str) {
+      str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      str = str.replace(/\s+/g, '_');
+      return str;
+    }
+  });
 
-            document.addEventListener("DOMContentLoaded", function () {
-                var onSuccess = function (position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    const customIcon = createCustomIcon();
-                    const marker = new mapboxgl.Marker({ element: customIcon })
-                        .setLngLat([longitude, latitude])
-                        .addTo(map);
+  var data1 = {
+    datasets: [{
+      data: [5, 5, 9, 0, 0, 5, 0, 0],
+      backgroundColor: ["#0000CD", "#00FF7F", "#9400D3", "#800000", "#FFD700", "#ADD8E6", "#D2691E", "#228B22"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98", "#BA55D3",  "#CD5C5C", "#F0E68C"]
+    }],
+    labels: ['Homicídio doloso', 'Homicídio culposo', 'Tentativa de homicídio', 'Latrocínio', 'Número de vítimas de latrocínio', 'Homicídio culposo por acidente de trânsito', 'Homicídio doloso por acidente de trânsito', 'Número de vítimas de homicídio doloso por acidente de trânsito']
+  };
+  
+  var ctx1 = document.getElementById("myChart").getContext("2d");
+  
+  var myChart1 = new Chart(ctx1, {
+    type: 'doughnut',
+    data: data1,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
 
-                    map.flyTo({ center: [longitude, latitude], zoom: 16 });
-                    getCityName(latitude, longitude);
-                };
+  var data2 = {
+    datasets: [{
+      data: [2938, 24],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx2 = document.getElementById("myChart2").getContext("2d");
+  
+  var myChart2 = new Chart(ctx2, {
+    type: 'pie',
+    data: data2,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
 
-                function onError(error) {
-                    console.error('Error getting user location:', error.message);
-                }
+  var data3 = {
+    datasets: [{
+      data: [6, 21, 239, 2, 0],
+      backgroundColor: ["#0000CD", "#00FF7F", "#9400D3", "#800000", "#D2691E", "#228B22"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98", "#BA55D3",  "#CD5C5C"]
+    }],
+    labels: ['Estupro', 'Estupro de vulnerável', 'Lesão corporal dolosa', 'Lesão corporal culposa', 'Lesão corporal seguida de morte']
+  };
+  
+  var ctx3 = document.getElementById("myChart001").getContext("2d");
+  
+  var myChart3 = new Chart(ctx3, {
+    type: 'doughnut',
+    data: data3,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
 
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-                } else {
-                    console.error('Geolocation is not supported by this browser.');
-                }
+  var data4 = {
+    datasets: [{
+      data: [2938, 268],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx4 = document.getElementById("myChart01").getContext("2d");
+  
+  var myChart4 = new Chart(ctx4, {
+    type: 'pie',
+    data: data4,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
 
-                function createCustomIcon() {
-                    const iconElement = document.createElement('div');
-                    iconElement.style.width = '10px';
-                    iconElement.style.height = '10px';
-                    iconElement.style.backgroundColor = '#0074D9';
-                    iconElement.style.border = '2px solid #FFFFFF';
-                    iconElement.style.borderRadius = '50%';
-                    return iconElement;
-                }
+  var data5 = {
+    datasets: [{
+      data: [416,1520,47,126],
+      backgroundColor: ["#0000CD", "#00FF7F","#800000", "#D2691E"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['roubo','furto','Roubo de veículo', 'Furto de veículo']
+  };
+  
+  var ctx5 = document.getElementById("myChart003").getContext("2d");
+  
+  var myChart5 = new Chart(ctx5, {
+    type: 'doughnut',
+    data: data5,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
 
-                function getCityName(latitude, longitude) {
-                    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?types=place&access_token=${mapboxgl.accessToken}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const cityName = data.features[0].text;
-                            console.log('City Name:', cityName);
-                            document.getElementById("local").textContent = cityName;
-                        })
-                        .catch(error => {
-                            console.error('Error fetching location:', error);
-                        });
-                }
-            });
-        </script>
+  var data6 = {
+    datasets: [{
+      data: [2938, 2109],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx6 = document.getElementById("myChart03").getContext("2d");
+  
+  var myChart6 = new Chart(ctx6, {
+    type: 'pie',
+    data: data6,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
+
+  var data7 = {
+    datasets: [{
+      data: [0, 13],
+      backgroundColor: ["#9400D3", "#800000"],
+      hoverBackgroundColor: ["#BA55D3",  "#CD5C5C"]
+    }],
+    labels: ['Roubo a banco', 'Roubo de carga']
+  };
+  
+  var ctx7 = document.getElementById("myChart004").getContext("2d");
+  
+  var myChart7 = new Chart(ctx7, {
+    type: 'doughnut',
+    data: data7,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
+  var data8 = {
+    datasets: [{
+      data: [2938, 13],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx8 = document.getElementById("myChart04").getContext("2d");
+  
+  var myChart8 = new Chart(ctx8, {
+    type: 'pie',
+    data: data8,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
+</script>
 </body>
 </html>

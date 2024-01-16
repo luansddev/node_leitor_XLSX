@@ -29,7 +29,7 @@ body {
 }
 
 .logo {
-  width: 40px;
+  width: 35px;
 }
 
 h2 {
@@ -48,11 +48,12 @@ h2 {
   background: #000;
   border: solid 1px #ccc;
   font-size: 1.2em;
-  border-radius: 5px;
+  border-radius: 7px;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: 25px;
 }
 
 .box {
@@ -66,14 +67,14 @@ h2 {
 }
 
 #log {
-  width: 100%;
+  width: 85%;
   height: 50px;
   font-family: "GlacialR", sans-serif;
   color: #000;
   background: #fff;
-  border: solid 1px #ccc;
+  border: solid 1px rgb(134, 133, 133);
   font-size: 1.2em;
-  border-radius: 5px;
+  border-radius: 7px 0px 0px 7px;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -82,7 +83,7 @@ h2 {
 
 .out button img {
   width: 20px;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .out p {
@@ -102,10 +103,8 @@ h2 {
 }
 
 h3 {
-  color: #fff;
   width: 100%;
   font-family: "Avant", sans-serif;
-  text-align: right;
   font-size: 1.2em;
   color: #fff;
   text-align: left;
@@ -156,7 +155,75 @@ h3 {
   color: rgb(0, 64, 255);
 }
 
+.ali {
+    display: flex;
+    flex-direction: line;
+    justify-content: space-between;
+}
 
+.info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    border: solid 1px rgb(134, 133, 133);
+    margin-left: 10px;
+    border-radius: 0px 10px 10px 0px;
+}
 
+.info img{
+    width: 25px;
+}
 
+.info:hover {
+  transform: scale(0.9);
+  transition: all 0.2s;
+}
 
+.info_list {
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.info_list b {
+    font-family: "GlacialR";
+    font-size: 1.2em;
+    font-weight: 300;
+    color: rgb(0, 0, 0);
+    margin-bottom: 15px;
+}
+
+.info_list i {
+    font-style: normal;
+    font-family: "GlacialR";
+    color: red;
+    margin-bottom: 15px;
+    }
+
+.list_info {
+    position: relative;
+    display: none;
+    top: -50px;
+    animation-name: list;
+    animation-fill-mode: forwards;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes list {
+    0% {
+        opacity: 0;
+        top: -50px;
+    }
+    100% {
+        opacity: 1;
+        top: 0;
+    }
+}
+
+.aberta {
+    display: block;
+}

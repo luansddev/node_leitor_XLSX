@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style-config.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+                        <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="./components/conexao.js"></script>
+     <script src="./components/divs.js"></script>
+    <title>Configurações</title>
+</head>
+<body>
+    <script>
+
+                       firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+            }else{
+                            window.location.href = "introduct.html";
+            }
+        });
+                function logout() {
+  firebase.auth().signOut()
+    .then(() => {
+      window.location.href = "introduct.html";
+    })
+    .catch((error) => {
+      console.error("Erro no logout:", error);
+    });
+}
+    </script>
+ <div class="slide">
+  <div class="center">
+    <div class="title">
+    <h2>Configurações</h2>
+  </div>
+
+
+
+
+
+
+
+<div class="anonymous-content">
+  <div class="permitions">
+    <div class="title"><b>Permissões</b></div>
+
+
+    <div class="horizon">
+      <b>Localização</b>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+  <div class="under-box">
+    <div class="title"><b>Ajuda</b></div>
+    <div class="align">
+    <a href="termos.html">Termos de uso</a>
+    <a href="help.html">Sobre o aplicativo</a>
+
+    <div class="align-2">
+      <button onclick="redirect('contaAnon.html')">Conta</button>
+      <button id="abc" onclick="logout()">Sair</button>
+    </div>
+
+    </div>
+  </div>
+
+
+
+
+</div>
+</div>  
+<div class="nav-inferior">
+  
+  <a href="regiaoAnon.html"><button><img src="./ICONS/home2.png"></button></a>
+  
+  <a href="contaAnon.html"><button><img src="./ICONS/persons.png"></button></a>
+  
+  <div class="nav-line">
+  <a href="configuracaoAnon.html"><button class="icon"><img src="./ICONS/config.png"></button></a>
+  </div>
+</div>
+
+
+
+
+
+
+<script src="./components/script-config.js"></script>
+</body>
+</htlm>

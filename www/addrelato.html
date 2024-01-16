@@ -8,10 +8,133 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="./components/conexao.js"></script>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
     <title>Adicionar relato</title>
 </head>
 
 <body>
+ <script>
+function obterLocalizacaoUsuario() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            obterNomeCidade(latitude, longitude);
+        });
+    } else {
+        console.log("Geolocalização não suportada no seu navegador.");
+        adicionarRelatoComCidade("Cidade Desconhecida");
+    }
+}
+
+function obterNomeCidade(latitude, longitude) {
+    const accessToken = "pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w";
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${accessToken}`;
+
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            const cidade = data.features[0].context.find((context) =>
+                context.id.startsWith("place.")
+            ).text;
+
+            adicionarRelatoComCidade(cidade);
+        })
+        .catch((error) => {
+            console.error("Erro ao obter nome da cidade:", error);
+            adicionarRelatoComCidade("Cidade Desconhecida"); 
+        });
+}
+
+
+function obterBoletimUID() {
+    const boletimInput = document.getElementById("boletim");
+
+    if (boletimInput) {
+        const boletimUID = boletimInput.value;
+        return boletimUID || null;
+    } else {
+        return null;
+    }
+}
+
+
+
+function adicionarRelatoComCidade(cidade) {
+    const textarea = document.querySelector("textarea");
+
+    if (!textarea) {
+        console.log("Preencha a descrição do relato antes de adicioná-lo.");
+        return;
+    }
+
+    if (!tipoCrimeSelecionado.length) {
+        alert("Selecione pelo menos um tipo de crime antes de adicionar o relato.");
+        return;
+    }
+
+    const relatoTexto = textarea.value;
+    const dataHora = new Date();
+
+    const user = firebase.auth().currentUser;
+    const uid = user.uid;
+
+    const db = firebase.firestore();
+
+    const boletimUID = obterBoletimUID();
+
+    const relatoDoc = {
+        nome: uid,
+        dataHora: dataHora,
+        relato: relatoTexto,
+        tipoCrime: tipoCrimeSelecionado.map((div) => div.innerText),
+        cidade: cidade,
+        boletim: boletimUID, // Pode ser null se não tiver boletim
+    };
+
+    const relatosRef = db.collection("usuarios").doc(uid).collection("relato");
+
+    relatosRef.add(relatoDoc)
+        .then((docRef) => {
+            console.log("Relato adicionado com sucesso!");
+
+            if (boletimUID) {
+                const boletinsRef = db.collection("boletins");
+                const boletimData = {
+                    boletim: boletimUID,
+                    verificado: false,
+                };
+                return boletinsRef.add(boletimData);
+            }
+
+            return null;
+        })
+        .then(() => {
+
+            textarea.value = "";
+
+            tipoCrimeSelecionado.forEach((tipo) => {
+                tipo.classList.remove("preto", "vermelho", "cinza", "azul");
+            });
+
+            tipoCrimeSelecionado = [];
+            window.location.href = "relatos.html"
+        })
+        .catch((error) => {
+            console.error("Erro ao adicionar relato:", error);
+        });
+}
+
+
+</script>
+
+
   <div class="slide">
         <div class="center">
           <div class="title-rel">
@@ -32,16 +155,33 @@
           
           <div id="resposta">
           </div>
-          
+
           <div class="text" id="text">
             <p id="oll">Descreva abaixo o relato:</p>
             <div class="old">
               <div class="ug">
               <textarea placeholder="Escreva aqui"></textarea>
-              <button style="background:blue;border:none;"onclick="redirect('regiao.html')"><img src="./ICONS/addrel2.png">Adicionar relato</button>
+              <br><br>
+                        <div class="msg-verificacao" style="display: none;">
+  <b> ✓ Relato adicionado!</b>
+</div>
+
+<div id="crime">
+     <p>Você pode selecionar a natureza do crime para facilitar a compreensão do seu relato:</p>    
+     <div class="check">
+       <div class="al tipoCrime" id="crimeV" onclick="cor1()"><p>Crime contra a vida</p></div>
+<div class="al tipoCrime" id="crimeI" onclick="cor2()"><p>Crime contra a integridade física</p></div>
+<div class="al tipoCrime" id="crimeP" onclick="cor3()"><p>Crime contra o patrimônio</p></div>
+<div class="al tipoCrime" id="crimeS" onclick="cor4()"><p>Crime contra a propriedade e segurança pública</p></div>
+     </div>
+  </div>
+
+              <button style="background:blue;border:none;"onclick="obterLocalizacaoUsuario()"><img src="./ICONS/addrel2.png">Adicionar relato</button>
             </div>
             </div>
           </div>
+
+          <div class="crime"></div>
         </div> 
 </div>
   <script src="./components/script-rel.js"></script>

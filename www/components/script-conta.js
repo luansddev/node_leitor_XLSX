@@ -67,6 +67,11 @@ function opendiv() {
     content2.style.display = "none";
   }
 
+  function close() {
+      const content = document.querySelector('.conteudo-menu');
+      content.style.display = "none";
+  }
+
   function validaremail() {
     const email = document.getElementById('email').value;
               document.getElementById('codigoVerificacao').textContent = email;

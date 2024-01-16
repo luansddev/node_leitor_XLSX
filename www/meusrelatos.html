@@ -9,10 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+        <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="./components/conexao.js"></script>
+        <script src="./components/firebase.js"></script>
     <title>Meus relatos</title>
 </head>
 <body>
-  
+
  <div class="nav-box-b">
     <a><button class="oo1" style="background: #ebe6e6;">MEUS RELATOS</button></a>
     <a href="relatosalvos.html"><button class="oo2">RELATOS SALVOS</button></a>
@@ -21,152 +26,16 @@
  
  <div class="title-rel">
    <div class="align">
-     <button onclick="redirect()"><img src="./ICONS/exit_.png"></button>
+     <button onclick="redirect('relatos.html')"><img src="./ICONS/exit_.png"></button>
     <div class="align-2">
-     <button><img src="./ICONS/insights.png"></button>
      <button><img src="./ICONS/info.png"></button>
     </div>
    </div>
  </div>
+
  
- <div class="relato">
-   <div class="center">
-     <div class="conteudo-relato">
-   <div class="box-relato">
-     <div class="title-relato">
-       <div class="img-box"><img src="./IMG/person.png"></div>
-       <div class="box-u">
-       <b>Usuário anônimo</b>
-       <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-       </div>
-       <div class="security">
-       <button class="saved" onclick="altIcon1(this)"><img src="./ICONS/salve.png"></button>
-       
-       <button class="dd"><img id="savedImage2" src="./ICONS/delete.png"></button></div>
-     </div>
-                 <div class="line-h"></div>
-     <center>
-          <div class="text">
-                   <section> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</section>
-     </center>
-                  <div class="line-h"></div>
-  <div class="coment">
-    <div class="coment-title">  
-      <img src="./ICONS/coment.png">
-        <b class="nm_coment">0</b>
-        
-      <button class="close" onclick="close(this)"><img src="./ICONS/up.png"><b>Fechar</b></button>
-    </div>  
-        <div class="nav-coment-box">
-          <div class="nav-coment">
-            <button><textarea placeholder="Comentar"></textarea>
-  <div class="line-v1"></div>
-  <button><img src="./ICONS/send.png"></button>
-  </button>
-          </div>
-      </div>
-    <center><div class="line-x"></div></center>
-    <div class="comentario-box">
-      <div class="text-coment">
-        <div class="title-div-coment">
-          <div class="img-box"><img src="./IMG/person.png"></div>
-       <div class="box-c">
-       <b>Usuário anônimo</b>
-       <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-          </div>
-           <div class="security-coment">
-       <button class="saved" onclick="altIcon3(this)"><img src="./ICONS/flagout.png"></button>
-   </div>
-        </div>
-        <div class="coment-text">
-         <u>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</u></div>
-      <center><div class="line-coment"></div></center>
-      </div>
-       <div class="text-coment">
-        <div class="title-div-coment">
-          <div class="img-box"><img src="./IMG/person.png"></div>
-       <div class="box-c">
-       <b>Usuário anônimo</b>
-       <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-          </div>
-           <div class="security-coment">
-       <button class="saved" onclick="altIcon3(this)"><img src="./ICONS/flagout.png"></button>
-   </div>
-        </div>
-        <div class="coment-text">
-         <u>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</u></div>
-      <center><div class="line-coment"></div></center>
-      </div>
-  </div>
-  </div>
-  <div class="comentario" onclick="coment(this)"><a>Comentários: <b class="nm_coment2">0</b></a></div>
-</div>
-</div>
+   <div id="relato" >
 
-     
-
-     <div class="conteudo-relato">
-   <div class="box-relato">
-     <div class="title-relato">
-       <div class="img-box"><img src="./IMG/person.png"></div>
-       <div class="box-u">
-       <b>Usuário anônimo</b>
-       <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-       </div>
-       <div class="security">
-       <button class="saved" onclick="altIcon1(this)"><img src="./ICONS/salve.png"></button>
-       
-       <button class="dd"><img id="savedImage2" src="./ICONS/delete.png"></button></div>
-     </div>
-                 <div class="line-h"></div>
-     <center>
-          <div class="text">
-                   <section>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</section>
-     </center>
-                  <div class="line-h"></div>
-  <div class="coment">
-    <div class="coment-title">  
-      <img src="./ICONS/coment.png">
-        <b class="nm_coment">0</b>
-        
-      <button class="close" onclick="close(this)"><img src="./ICONS/up.png"><b>Fechar</b></button>
-    </div>  
-        <div class="nav-coment-box">
-          <div class="nav-coment">
-            <button><textarea placeholder="Comentar"></textarea>
-  <div class="line-v1"></div>
-  <button><img src="./ICONS/send.png"></button>
-  </button>
-          </div>
-      </div>
-    <center><div class="line-x"></div></center>
-    <div class="comentario-box">
-      
-  </div>
-  </div>
-  <div class="comentario" onclick="coment(this)"><a>Comentários: <b class="nm_coment2">0</b></a></div>
-</div>
-</div>
-
-
-
-
-</div>
-
-
-
-     
-  
-     
-     
-
-    
-     
-        
-     
-  
-        
    </div>
    </div>
    </div>
@@ -194,7 +63,56 @@
   
   <a href="configuracao.html"><button><img src="./ICONS/config2.png"></button></a>
 </div>
-<script></script>
+<script>
+function salvarDocumento(docId) {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      const uidDoUsuario = user.uid;
+      const usuarioRef = firebase.firestore().collection('usuarios').doc(uidDoUsuario);
+      const relatoRef = usuarioRef.collection('relato').doc(docId);
+      const relatosSalvosRef = usuarioRef.collection('relatosSalvos').doc(docId);
+
+      // Verifica se a subcoleção relatosSalvos já existe
+      relatosSalvosRef.get().then((doc) => {
+        if (!doc.exists) {
+          // Se não existe, cria a subcoleção
+          return relatosSalvosRef.set({});
+        } else {
+          // Se já existe, apenas salva o documento
+          return Promise.resolve();
+        }
+      }).then(() => {
+        // Após verificar e, se necessário, criar a subcoleção, salva o documento
+        return relatosSalvosRef.set({});
+      }).then(() => {
+        console.log('Documento salvo com sucesso');
+      }).catch((error) => {
+        console.error('Erro ao salvar o documento: ', error);
+      });
+    }
+  });
+}
+
+
+function removerDocumentoSalvo(docId) {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      const uidDoUsuario = user.uid;
+      const usuarioRef = firebase.firestore().collection('usuarios').doc(uidDoUsuario);
+      const relatosSalvosRef = usuarioRef.collection('relatosSalvos').doc(docId);
+
+      relatosSalvosRef.delete()
+        .then(() => {
+          console.log('Documento removido com sucesso');
+        })
+        .catch((error) => {
+          console.error('Erro ao remover o documento salvo: ', error);
+        });
+    }
+  });
+}
+
+</script>
 <script src="./components/script-nav.js"></script>
 </body>
-</htlm>
+</html>

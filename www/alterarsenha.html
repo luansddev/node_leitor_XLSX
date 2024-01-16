@@ -8,14 +8,49 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+                    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="./components/conexao.js"></script>
     <title>Alterar senha</title>
 </head>
 <body>
+    <script>
+         function alterarSenha() {
+            const senhaAtual = document.getElementById("senhaAtual").value;
+            const novaSenha = document.getElementById("senha").value;
+
+            const user = firebase.auth().currentUser;
+
+            const credencial = firebase.auth.EmailAuthProvider.credential(
+                user.email,
+                senhaAtual
+            );
+
+            user.reauthenticateWithCredential(credencial)
+                .then(() => {
+
+                    user.updatePassword(novaSenha)
+                        .then(() => {
+                            console.log("Senha atualizada com sucesso.");
+                            window.location.href = "conta.html";a
+                        })
+                        .catch((error) => {
+                            console.error("Erro ao atualizar a senha: ", error);
+                        });
+                })
+                .catch((error) => {
+                    console.error("Erro na reautenticação: ", error);
+                     const erroPass = document.querySelector('.msg-erro');
+                        erroPass.style.display = 'block';
+                });
+        }
+    </script>
 <div class="slide"> 
     <div class="align">
     <div class="title-rel">
         <div class="align">
-          <button onclick="redirect('conta.html')"><img src="./ICONS/exit_.png"></button>
+          <button onclick="redirect('configuracao.html')"><img src="./ICONS/exit_.png"></button>
         </div>
       </div>
     </div>
@@ -33,7 +68,7 @@
 
     <div class="pass">
     <div class="input-group">
-      <input required="" type="password" name="Senha" autocomplete="off" class="input">
+      <input required="" id="senhaAtual" type="password" name="Senha" autocomplete="off" class="input">
       <label class="user-label">Digite sua senha atual</label>
     </div>
     <a href="esquecisenha.html" class="senha">Esqueci minha senha</a>
@@ -48,9 +83,15 @@
         <input required="" type="password" name="senha" autocomplete="off" class="input" id="senha">
         <label class="user-label">Digite a nova senha</label>
       </div>
+      <div class="msg-erro" style="display: none;">
+  <b> &#9432 Senha atual incorreta.</b>
+</div>
       <div class="ug">
         <button onclick="redirect('conta.html')"><img src="./ICONS/close.png">Cancelar</button> 
-        <button style="background:blue;border:none;"onclick="redirect('regiao.html')"><img src="./ICONS/cad.png">Alterar senha</button> 
+
+
+        <button style="background:blue;border:none;"onclick="alterarSenha()"><img src="./ICONS/cad.png">Alterar senha</button> 
+
       </div>
     </div>
    </div> 

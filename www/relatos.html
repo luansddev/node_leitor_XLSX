@@ -4,158 +4,448 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style-rel.css">
+    <link rel="stylesheet" href="./css/style-menu.css">
+    <link rel="stylesheet" href="./css/load.css">
+        <link rel="stylesheet" href="./css/style-rel.css">
+    <link rel="stylesheet" href="./css/style-data.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aleo&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
-    <title>Relatos</title>
+    <script src="./components/loader.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+    <script src="./components/conexao.js"></script>
+    <script src="./components/divs.js"></script>
+        <script src="./components/firebase-two.js"></script>
+        <script src="./components/script-nav.js"></script>
+
+    <title>Sua região</title>
 </head>
 <body>
-  <div class="nav-box">
-   <div class="nav-superior">
-      <a href="regiao.html"><button>Região</button></a>
-      <div class="nav-line">
-      <a><button>Relatos</button></a>
-      <div class="line"></div>
-      </div>
-      <a href="salvos.html"><button>Salvos</button></a>
+<script>
+
+function close() {
+  var comentDiv = this.parentElement.parentElement;
+  comentDiv.style.display = 'none';
+}
+</script>
+
+    <div class="nav-box">
+        <div class="nav-superior">
+<a href="regiao.html"><button>Região</button></a>
+
+      <div class="nav-line">  <a><button>Relatos</button></a>
+            <div class="line"></div>
+    </div>
+    
+    <a href="salvos.html" class="anonymous-content2"><button>Locais</button></a>
+    
+  </div>
+    </div>
+
+    <div class="slide">
+        <div class="center">
+            <div class="title">
+                <b><h2 id="local">Sua localização</h2></b>
+               <div id="pesquisar"><a href="pesquisa.html"><button><img src="./ICONS/travel.png">Pesquisar região </button></div></a>
+            </div>
+        </div>
+        <div class="map-box" style="display:none;">
+            <div id="map"></div>
+        </div>
+
+    </div>
+
+<!-- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -->
+ <div class="slide-1">
+
+    <div id="relato" class="relato">
+
     </div>
   </div>
-  
-
-  <div class="slide">
-
-    <div class="relato">
-      <div class="center">
-        <div class="conteudo-relato">
-          <div class="box-relato">
-
-            <div class="title-relato">
-              <div class="img-box"><img src="./IMG/person.png"></div>
-              <div class="box-u">
-              <b>Usuário <b>#000000</b></b>
-              <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-              </div>
-              <div class="security">
-              <button class="saved"><img src="./ICONS/verl.png"></button>
-              <button class="saved" onclick="altIcon1(this)"><img src="./ICONS/salve.png"></button>
-              <button class="dd" onclick="altIcon2(this)"><img id="savedImage2" src="./ICONS/outflag.png"></button></div>
-            </div>
-
-            <div class="line-h"></div>
-            <center>
-              <div class="text">
-              <section>
-               Na rua Arpoador, de Mongaguá, ocorreu um assalto a mão armada perto da escola do Pequeno Príncipe. Um alerta para os pais da região!
-              </section>
-            </center>
-            <div class="line-h"></div>
-            <div class="coment">
-              <div class="coment-title">  
-                <img src="./ICONS/coment.png">
-                <b class="nm_coment">0</b>
-                <button class="close" onclick="close(this)"><img src="./ICONS/up.png"><b>Fechar</b></button>
-              </div>  
-              <div class="nav-coment-box">
-                <div class="nav-coment">
-                  <button>
-                    <textarea placeholder="Comentar"></textarea>
-                    <div class="line-v1"></div>
-                    <button><img src="./ICONS/send.png"></button>
-                  </button>
-                </div>
-            </div>
-            <center><div class="line-x"></div></center>
-            <div class="comentario-box">
-                <div class="text-coment">
-                  <div class="title-div-coment">
-                    <div class="img-box"><img src="./IMG/person.png"></div>
-                    <div class="box-c">
-                      <b>Usuário anônimo</b>
-                      <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-                    </div>
-                    <div class="security-coment">
-                      <button class="saved" onclick="altIcon3(this)"><img src="./ICONS/flagout.png"></button>
-                    </div>
-                  </div>
-                  <div class="coment-text">
-                    <u>Nossa, sempre achei que essa área fosse tranquila, vou ficar mais atenta!!</u>
-                  </div>
-                  <center><div class="line-coment"></div></center>
-                </div>
-                <div class="text-coment">
-                  <div class="title-div-coment">
-                    <div class="img-box"><img src="./IMG/person.png"></div>
-                    <div class="box-c">
-                      <b>Usuário anônimo</b>
-                      <i>15/08/2023 <b> • </b><strong>00:00</strong></i>
-                    </div>
-                    <div class="security-coment">
-                      <button class="saved" onclick="altIcon3(this)"><img src="./ICONS/flagout.png"></button>
-                    </div>
-                  </div>
-                  <div class="coment-text">
-                    <u>
-                    Meu deus :0</u>
-                  </div>
-                  <center><div class="line-coment"></div></center>
-                </div>
-            </div>
-          </div>
-        <div class="comentario" onclick="coment(this)"><a>Comentários: <b class="nm_coment2">0</a></b></div>
-    </div>
-  </div>
-
-
-
-
-  </div>
-
-
-
-      
-    
-      
-      
-
-      
-      
-          
-      
-    
-          
     </div>
    </div>
    </div>
    </div>
 </div>  
 
-
+<div class="anonymous-content">
 <div class="nav-relato">
   <a href="addrelato.html"><button>ADICIONAR RELATO<img src="./ICONS/addrel.png"></button></a>
-  
-  
-  
   <a href="meusrelatos.html"><button id="button-box">Meus relatos<img src="./ICONS/relato.png"></button></a>
 </div>
-
-
-
-
-
-<div class="nav-inferior">
-  
-  <div class="nav-line">
-  <a href="regiao.html"><button class="icon"><img src="./ICONS/home.png"></button></a>
-  </div>
-
-  <a href="notificacao.html"><button><img src="./ICONS/notificacao2.png"></button></a>
-  
-  <a href="conta.html"><button><img src="./ICONS/persons.png"></button></a>
-  
-  <a href="configuracao.html"><button><img src="./ICONS/config2.png"></button></a>
 </div>
-<script></script>
-<script src="./components/script-nav.js"></script>
+
+
+
+
+<!-- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -->
+
+    <div class="nav-inferior">
+        <div class="nav-line">
+            <a href="regiao.html"><button class="icon"><img src="./ICONS/home.png"></button></a>
+        </div>
+        <a href="notificacao.html" class="anonymous-content3"><button><img src="./ICONS/notificacao2.png"></button></a>
+        <a href="conta.html"><button><img src="./ICONS/persons.png"></button></a>
+        <a href="configuracao.html"><button><img src="./ICONS/config2.png"></button></a>
+    </div>
+
+
+
+
+   <script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoidGhlYmxlc3NlZCIsImEiOiJjbGk5ZnQ0eDcwZXZ0M2xvZXk1enN0ZjN0In0.RZRZyoo90RPTxVMZ9xeW-w';
+  const bounds = [
+    [-53.372976, -25.335800],
+    [-44.199839, -19.598577]
+  ];
+
+  let cityName = '';
+
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/theblessed/clo37d4g700dv01ozfox7g4l5',
+    center: [-47.889627, -15.780148],
+    zoom: 6,
+    maxBounds: bounds
+  });
+
+
+  
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var onSuccess = function (position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const customIcon = createCustomIcon();
+      const marker = new mapboxgl.Marker({ element: customIcon })
+        .setLngLat([longitude, latitude])
+        .addTo(map);
+
+      map.flyTo({ center: [longitude, latitude], zoom: 16 });
+      getCityName(latitude, longitude);
+    };
+
+    function onError(error) {
+      console.error('Error getting user location:', error.message);
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+
+    function createCustomIcon() {
+      const iconElement = document.createElement('div');
+iconElement.style.width = '10px';
+iconElement.style.height = '10px';
+iconElement.style.backgroundColor = '#0074D9';
+iconElement.style.border = '2px solid #FFFFFF';
+iconElement.style.borderRadius = '50%';
+      return iconElement;
+    }
+
+    function getCityName(latitude, longitude) {
+      
+
+
+fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?types=place&access_token=${mapboxgl.accessToken}`)
+
+        .then(response => response.json())
+        .then(data => {
+          cityName = data.features[0].text;
+          document.getElementById("local").textContent = cityName;
+        console.log(cityName);
+          fetch('/ssp_scrapper/server.js', { // Altere o caminho para server.js
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "cidade": cityName })
+          })
+            .then(response => response.json())
+            .then(response => {
+              const dadosColetados = response.dados;
+              const dadosColetadosElement = document.getElementById("dados-coletados");
+              dadosColetadosElement.textContent = JSON.stringify(dadosColetados);
+            })
+
+            .catch(error => {
+              console.error('Error fetching location:', error);
+            })
+
+            .finally(() => {
+
+            });
+        })
+        .catch(error => {
+          console.error('Error fetching location:', error);
+        });
+    }
+  });
+
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [4, 8, 0, 5, 0],
+      backgroundColor: ["#0000CD", "#00FF7F", "#9400D3", "#800000", "#FFD700"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98", "#BA55D3",  "#CD5C5C", "#F0E68C"]
+    }],
+    labels: ['Homicídio doloso', 'Tentativa de homicídio', 'Latrocínio', 'Homicídio culposo por acidente de trânsito', 'Homicídio doloso por acidente de trânsito']
+  };
+  
+  var ctx = document.getElementById("myChart").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [352, 17],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx = document.getElementById("myChart2").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
+</script>
+
+
+
+
+<script>
+  var data = {
+    datasets: [{
+      data: [5, 15, 178, 0],
+      backgroundColor: ["#0000CD", "#00FF7F", "#9400D3", "#800000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98", "#BA55D3",  "#CD5C5C"]
+    }],
+    labels: ['Estupro', 'Estupro de vulnerável', 'Lesão corporal', 'Lesão corporal seguida de morte']
+  };
+  
+  var ctx = document.getElementById("myChart001").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [352, 198],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx = document.getElementById("myChart01").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
+</script>
+
+
+
+<script>
+  var data = {
+    datasets: [{
+      data: [352, 91],
+      backgroundColor: ["#0000CD", "#00FF7F"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Roubo de veículo', 'Furto de veículo']
+  };
+  
+  var ctx = document.getElementById("myChart003").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [352, 127],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx = document.getElementById("myChart03").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
+</script>
+
+
+
+
+
+<script>
+  var data = {
+    datasets: [{
+      data: [1, 100],
+      backgroundColor: ["#9400D3", "#800000"],
+      hoverBackgroundColor: ["#BA55D3",  "#CD5C5C"]
+    }],
+    labels: ['Roubo a banco', 'Roubo de carga']
+  };
+  
+  var ctx = document.getElementById("myChart004").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
+    }
+  });
+</script>
+<script>
+  var data = {
+    datasets: [{
+      data: [352, 10],
+      backgroundColor: ["#ccc", "#000"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98"]
+    }],
+    labels: ['Total de crimes', 'Esse tipo de crime']
+  };
+  
+  var ctx = document.getElementById("myChart04").getContext("2d");
+  
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          maxWidth: 1,
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+            boxWidth: 10,
+            borderRadius: 100,
+          }
+        }
+      },
+      cutout: '5%', 
+    }
+  });
+</script>
 </body>
-</htlm>
+</html>

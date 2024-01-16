@@ -83,7 +83,6 @@ body {
     border: none;
   }
   
-  
   .nav-inferior {
     position: fixed;
     z-index: 100;
@@ -181,18 +180,27 @@ body {
 
   .title-conta button {
     background: none;
-    border: none;
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    border: none;
+    font-family: "GlacialR";
+    font-size: 0.9em;
   }
 
   .title-conta img {
-    width: 45px;
+    width: 21px;
+    margin-left: 10px;
+    border-radius: 50px 50px 0px 50px;
+    border: 1px solid rgb(136, 136, 136);
+    padding: 6px;
   }
 
   .img-box{
     width: 100px;
     height: 100px;
-    margin-left: 10px;
+    margin-left: 0px;
     border-radius: 8px;
     border: none;
   }
@@ -205,15 +213,11 @@ body {
     display: flex;
     flex-direction: line;
     align-items: center;
-    margin-top: 10px;
-    height: 205px;
   }
 
   #align-v {
     display: flex;
     flex-direction: column;
-    margin-left: 25px;
-    margin-top: 16px;
     margin-bottom: auto;
     width: 100%;
   } 
@@ -241,13 +245,10 @@ body {
     border: none;
     border-radius: 3px;
     font-family: "GlacialR", sans-serif;
-    font-size: 0.8em;
-    padding: 5px 10px;
+    font-size: 1.0em;
     height: 50px;
-    margin-top: 48px;
     width: 100%;
-    padding-left: 20px;
-    display: flex;
+    padding-left: 10px;
     justify-content: center;
     max-width: 400px;
   }
@@ -255,44 +256,6 @@ body {
   #align-v a button img {
     width: 25px;
     margin-left: 10px;
-  }
-
-  .align-h {
-    display: flex;
-    flex-direction: column;
-    justify-content: top;
-    height: 100%;
-    margin-top: 0;
-  }
-
-  .align-h button {
-    margin-top: 8px;
-    border: none;
-    background: rgb(0, 89, 255);
-    color: #fff;
-    font-family: "GlacialR", sans-serif;
-    font-size: 0.9em;
-    border-radius: 4px;
-    padding: 7px;
-    height: 50px;
-    width: 100px;
-    margin-right: 20px;
-  }
-
-  .align-h a button {
-    background: #000;
-    color:#fff;
-    display: flex;
-    align-items: center;
-    border: none;
-    border-radius: 3px;
-    font-family: "Glacial", sans-serif;
-    font-size: 1.0em;
-    padding: 5px 10px;
-    margin-left: 10px;
-    width: 150px;
-    height: 60px;
-    text-align: left;
   }
 
   .line-v {
@@ -393,8 +356,7 @@ body {
 }
 
 .out-dados {
-  margin-top: 10px;
-  margin-bottom: 100px;
+  margin-top: 50px;
 }
 
 .align-dd {
@@ -404,8 +366,8 @@ body {
 }
 
 .align-dd b {
-  font-family: "Avant", Sans-Serif;
-  font-size: 1.2em;
+  font-family: "GlacialR", Sans-Serif;
+  font-size: 1.3em;
   margin-bottom: 5px;
 }
 
@@ -418,24 +380,66 @@ body {
 .align-bb {
   display: flex;
   flex-direction: line;
-  padding: 6px 20px 5px 18px;
-  background: #fff;
   border-radius: 5px;
+  align-items: center;
+  padding: 15px;
+  background: #fffcfc;
+    border: 1px solid #ccc;
+    box-shadow:  6px 6px 12px #f2f2f2,
+             -6px -6px 12px #ffffff;
+             margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-.align-bb:nth-child(2) {
-  margin-top: 40px;
+.align-bb:nth-child(5) {
+  display: flex;
+  flex-direction: line;
+  border-radius: 5px;
+  align-items: center;
+  padding: 15px;
+  background: #eef0f1;
+    border: 1px solid #ccc;
+    box-shadow:  6px 6px 12px #f2f2f2,
+             -6px -6px 12px #ffffff;
+    margin-bottom: 30px;
+    margin-top: 60px;
+    color: #000;
+}
+
+.align-bb:nth-child(5) u {
+  background: #0300ff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.align-bb:nth-child(5) u img {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
 }
 
 .align-bb button {
   background: none;
-  border: none;
-  width: 35px;
+  width: 40px;
+  height: 40px;
   margin-left: auto;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 5px;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+box-shadow:  6px 6px 12px #f2f2f2,
+             -6px -6px 12px #ffffff;
 }
 
 .align-bb button img {
-  width: 30px;
+  width: 25px;
 }
 
 .title-z {
@@ -876,9 +880,84 @@ body {
   font-size: 1.2em;
 }
 
+#txtx {
+    font-family: "GlacialR";
+    font-size: 1.2em;
+    font-weight: 100;
+    font-style: normal;
+    text-decoration: none;
+}
 
+#uid {
+     font-family: "GlacialR";
+    font-size: 1.2em;
+    font-weight: 100;
+    font-style: normal;
+    text-decoration: none;
+}
 
+.anonymous-content-visible {
+    padding: 10px;
+}
 
+.anonymous-content-visible b {
+    font-family: "GlacialR";
+    font-size: 1.3em;
+}
+
+.anonymous-content-visible p {
+    font-family: "GlacialR";
+    font-size: 1.1em;
+    margin-top: 40px;
+}
+
+.button-align {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.button-align b {
+    font-family: "GlacialR";
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-bottom: 10px; 
+}
+
+.button-align button:nth-child(1) {
+    background: #000;
+    color: #fff;
+    padding: 10px;
+    font-family: "GlacialR";
+    font-size: 1.0em;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 25px;
+}
+
+.button-align button {
+    background: linear-gradient(90deg, rgba(0,37,195,1) 0%, rgba(53,138,255,1) 100%);
+    color: #fff;
+    padding: 10px;
+    font-family: "GlacialR";
+    font-size: 1.0em;
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 25px;
+}
+
+.button-align button img {
+    width: 20px;
+    margin-right: 5px;
+}
 
   /*    animation-name: slide;
     animation-duration: 0.8s;

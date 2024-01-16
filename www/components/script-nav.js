@@ -1,14 +1,5 @@
 
-  function altIcon1(button) {
-    var image = button.querySelector('img');
-    
-    if (image.src.endsWith('salve.png')) {
-      image.src = './ICONS/salved.png';
-    } else {
-      image.src = './ICONS/salve.png';
-    }
-  }
-  
+
   
   function altIcon2(button) {
     var image = button.querySelector('img');
@@ -22,7 +13,9 @@
   
   function altIcon3(button) {
     var image = button.querySelector('img');
-    
+              setTimeout(function() {
+      window.location.href = "denuncia.html";
+    }, 1000); 
     if (image.src.endsWith('flagout.png')) {
       image.src = './ICONS/flag.png';
     } else {
@@ -30,8 +23,8 @@
     }
   }
   
-  function redirect(url) {
-    window.location.href = "relatos.html";
+function redirect(url) {
+    window.location.href = url;
   }
 
   let execute = 0;
