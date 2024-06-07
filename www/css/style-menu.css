@@ -202,7 +202,7 @@ button:hover {
 
 .title3  {
   display: flex;
-  align-items: center;
+  align-items: left;
   margin-top: 50px;
 }
 

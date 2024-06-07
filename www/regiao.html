@@ -76,7 +76,7 @@
         <div id="dados">
             <div class="title2">
                 <b><h2>Dados da região</h2></b>
-                <h4>&#9432 Todos os dados abaixo, incluindo os de Produtividade Policial, são obtidos pela Secretaria de Segurança Pública do estado de São Paulo, e podem ser acessados a partir de <a href="https://www.ssp.sp.gov.br/">www.ssp.sp.gov.br.</a></h4>
+                <h4>&#9432 Todos os dados abaixo, incluindo os de Produtividade Policial se referem ao mês anterior, e são obtidos pela Secretaria de Segurança Pública do estado de São Paulo, podendo ser acessados a partir de <a href="https://www.ssp.sp.gov.br/">www.ssp.sp.gov.br.</a></h4>
             </div>
             </div>
 <div class="table">
@@ -89,10 +89,8 @@
       <b>Homicídio culposo:<i id="homicidioCulposo">0</i></b>
       <b>Tentativa de Homicídio: <i id="tentativaHomicidio">0</i></b>
       <b>Latrocínio: <i id="latrocinio">0</i></b>
-      <b>Número de vítimas de latrocínio: <i id="nVitimasLatrocinio">0</i></b>
       <b>Homicídio culposo por acidente de trânsito: <i id="homicidioCulposoAcidente">0</i></b>
       <b>Homicídio doloso por acidente de trânsito: <i id="homicidioDolosoAcidente">0</i></b>
-      <b>Número de vítimas de homicídio doloso por acidente de trânsito: <i id="nVitimasHomicidioDolosoAcidente">0</i></b>
     </div>
     <div class="grafico-0">
         <canvas id="myChart2" width="20" height="10"></canvas>
@@ -111,7 +109,6 @@
     <div class="content">
       <b>Estupro: <i id="estupro">0</i></b>
       <b>Estupro de vulnerável: <i id="estuproVulneravel">0</i></b>
-      <b>Total de estupro: <i id="totalEstupro">0</i></b>
       <b>Lesão corporal dolosa: <i id="lesaoCorporal">0</i></b>
       <b>Lesão corporal culposa: <i id="lesaoCorporalCulposa">0</i></b>
       <b>Lesão corporal seguida de morte: <i id="lesaoCorporalMorte">0</i></b>
@@ -134,6 +131,7 @@
       <b>Furto: <i id="furto">0</i></b>
       <b>Roubo de veículo: <i id="rouboVeiculo">0</i></b>
       <b>Furto de veículo: <i id="furtoVeiculo">0</i></b>
+      <b>Extorsão mediante sequestro: <i id="extorsaoSequestro">0</i></b>
     </div>
     <div class="grafico-0">
         <canvas id="myChart03" width="20" height="10"></canvas>
@@ -166,19 +164,24 @@
                 <b><h2>Produtividade policial</h2></b>
             <div class="note"><i>Note que nem sempre um aumento nos dados oficiais de criminalidade indica uma piora na segurança pública. Em locais onde há uma grande quantidade de crimes não notificados, esse aumento nos crimes notificados é, na verdade, considerado um indicador positivo de credibilidade e desempenho policial. Queremos que você tenha uma compreensão completa da situação da segurança pública em sua região. Portanto, além dos dados de criminalidade, também forneceremos informações sobre a produtividade policial. Isso ajudará a avaliar a eficácia das autoridades locais na aplicação da lei e na coleta de estatísticas precisas.</i></div>    
             </div>
-            
-  <div class="datapp">
-    <div class="content-2">
-      <b>Nº DE INFRATORES APREENDIDOS EM FLAGRANTE: <i id="tdh">15</i></b>
-      <b>Nº DE INFRATORES APREENDIDOS POR MANDADO: <i id="tdh">17</i></b>
-      <b>Nº DE INFRATORES PRESOS EM FLAGRANTE: <i id="tdh">337</i></b>
-      <b>Nº DE INFRATORES PRESOS POR MANDADO: <i id="tdh">122</i></b>
-      <b>Nº DE PRISÕES EFETUADAS: <i id="tdh">414</i></b>
-      <b>Nº DE VEÍCULOS RECUPERADOS: <i id="tdh">131</i></b>
-    </div>
-  </div>
+            <div class="datapp">
+              <div class="content-2">
 
+                <div class="pdp">
+                    <b>Infratores presos em flagrante: <i id="infratoresPresosFlagrante">0</i></b>
+                    <b>Infratores presos por mandato: <i id="infratoresPresosMandato">0</i></b>
+                    <b>Infratores apreendidos em flagrante: <i id="infratoresApreendidosFlagrante">0</i></b>
+                    <b>Infratores apreendidos por mandato: <i id="infratoresApreendidosMandato">0</i></b>
+                    <b>Número de veículos recuperados: <i id="veiculosRecuperados">0</i></b>
+                    <div class="grafico">
+                      <canvas id="myChartpdp" width="20" height="10"></canvas>
+                    </div>
+                </div>
+                
 
+              </div>
+            </div>
+            <div class="note">&#9432 Os dados são atualizados ao fim de cada mês. Para visualizar dados de meses e anos anteriores, acesse: <a href="https://www.ssp.sp.gov.br/">www.ssp.sp.gov.br.</a></div>
 </div>
 
         </div>
@@ -253,70 +256,170 @@ fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude
           console.log(`Original City Name: ${cityName}`);
           console.log(`Scrapped City Name: ${cityNameScrapper}`);
  
-fetch(`https://gryfo.000webhostapp.com/?cityName=${cityNameScrapper}`, { method: 'GET', mode: 'cors' })
+          fetch(`https://gryfodtr.000webhostapp.com/geoloc.php?cityName=${cityNameScrapper}`, { method: 'GET', mode: 'cors' })
+    .then(response => response.json())
+    .then(geoData => {
+        if (geoData.status === 'success') {
+            console.log('Dados de geolocalização:', geoData.geolocationData);
+            addMarkers(geoData.geolocationData["FURTO - OUTROS"]);
+
+        } else {
+            console.error('Erro ao buscar dados de geolocalização:', geoData.message);
+        }
+    })
+    .catch(error => console.error('Erro ao buscar dados de geolocalização:', error));
+
+    function addMarkers(geolocationData) {
+  geolocationData.forEach(item => {
+    const crimeType = item.crimeType;
+    const latitude = item.latitude;
+    const longitude = item.longitude;
+
+    const customIcon = createCustomIcon2(crimeType);
+    const marker = new mapboxgl.Marker({ element: customIcon }).setLngLat([longitude, latitude]).addTo(map);
+  });
+}
+
+function createCustomIcon2(crimeType) {
+  const iconElement = document.createElement('img');
+  let imagePath = './ICONS/CRIMES_ICONS/ato.png';
+
+  
+ /* switch (crimeType) {
+    case 'FURTO':
+      imagePath = './ICONS/CRIMES_ICONS/ato.png';
+      break;
+      case 'FURTO DE VEÍCULO':
+      imagePath = './ICONS/CRIMES_ICONS/ato.png';
+      break;
+      case 'HOMICÍDIO CULPOSO POR ACIDENTE DE TRÂNSITO':
+      imagePath = './ICONS/CRIMES_ICONS/ato.png';
+      break;
+      case 'LESÃO CORPORAL CULPOSA POR ACIDENTE DE TRÂNSITO':
+      imagePath = './ICONS/CRIMES_ICONS/ato.png';
+      break;
+    default:
+      imagePath = './ICONS/CRIMES_ICONS/ato.png'; 
+      break;
+  }*/
+
+  iconElement.src = imagePath;
+  iconElement.style.width = '30px';
+  iconElement.style.height = '30px';
+  iconElement.style.borderRadius = '50%';
+  return iconElement;
+}
+
+          fetch(`https://gryfodtr.000webhostapp.com/index.php?cityName=${cityNameScrapper}`, { method: 'GET', mode: 'cors' })
             .then(response => response.json())
             .then(cityData => {
-                console.log(JSON.stringify(cityData));
+              console.log(cityData);
+
+              const extorsaoSequestroValue = cityData.cityData.SSP["EXTORSÃO MEDIANTE SEQUESTRO"] ?? 0;
+              document.getElementById("extorsaoSequestro").textContent = extorsaoSequestroValue;
+
+              const estuproValue = cityData.cityData.SSP.ESTUPRO ?? 0;
+              document.getElementById("estupro").textContent = estuproValue;
+
+              const estuproVulneravelValue = cityData.cityData.SSP["ESTUPRO DE VULNERÁVEL"] ?? 0;
+              document.getElementById("estuproVulneravel").textContent = estuproVulneravelValue;
+
+              const lesaoCorporalDolosaValue = cityData.cityData.SSP["LESÃO CORPORAL DOLOSA"] ?? 0;
+              document.getElementById("lesaoCorporal").textContent = lesaoCorporalDolosaValue;
+
+              const tentativaHomicidioValue = cityData.cityData.SSP["TENTATIVA DE HOMICÍDIO"] ?? 0;
+              document.getElementById("tentativaHomicidio").textContent = tentativaHomicidioValue;
+
+              const homicidioCulposoAcidenteValue = cityData.cityData.SSP["HOMICÍDIO CULPOSO POR ACIDENTE DE TRÂNSITO"] ?? 0;
+              document.getElementById("homicidioCulposoAcidente").textContent = homicidioCulposoAcidenteValue;
+
+              const rouboValue = cityData.cityData.SSP["ROUBO - OUTROS"] ?? 0;
+              document.getElementById("roubo").textContent = rouboValue;
+
+              const furtoValue = cityData.cityData.SSP["FURTO - OUTROS"] ?? 0;
+              document.getElementById("furto").textContent = furtoValue;
+
+              const rouboVeiculovalue = cityData.cityData.SSP["ROUBO DE VEÍCULO"] ?? 0;
+              document.getElementById("rouboVeiculo").textContent = rouboVeiculovalue;
+
+              const furtoVeiculoValue = cityData.cityData.SSP["FURTO DE VEÍCULO"] ?? 0;
+              document.getElementById("furtoVeiculo").textContent = furtoVeiculoValue;
+
+              const rouboCargaValue = cityData.cityData.SSP["ROUBO DE CARGA"] ?? 0;
+              document.getElementById("rouboCarga").textContent = rouboCargaValue;
+
+              const homicidioDolosoValue = cityData.cityData.SSP["HOMICÍDIO DOLOSO"] ?? 0;
+              document.getElementById("homicidioDoloso").textContent = homicidioDolosoValue;
+
+              const homicidioCulposoValue = cityData.cityData.SSP["HOMICÍDIO CULPOSO OUTROS"] ?? 0;
+              document.getElementById("homicidioCulposo").textContent = homicidioCulposoValue;
+
+              const latrocinioValue = cityData.cityData.SSP.LATROCÍNIO ?? 0;
+              document.getElementById("latrocinio").textContent = latrocinioValue;
+
+              const homicidioDolosoAcidenteValue = cityData.cityData.SSP["HOMICÍDIO DOLOSO POR ACIDENTE DE TRÂNSITO"] ?? 0;
+              document.getElementById("homicidioDolosoAcidente").textContent = homicidioDolosoAcidenteValue;
+
+              const lesaoCorporalCulposaValue = cityData.cityData.SSP["LESÃO CORPORAL CULPOSA - OUTRAS"] ?? 0;
+              document.getElementById("lesaoCorporalCulposa").textContent = lesaoCorporalCulposaValue;
+
+              const lesaoCorporalMorteValue = cityData.cityData.SSP["LESÃO CORPORAL SEGUIDA DE MORTE"] ?? 0;
+              document.getElementById("lesaoCorporalMorte").textContent = lesaoCorporalMorteValue;
+
+              const rouboBancoValue =  cityData.cityData.SSP["ROUBO A BANCO"] ?? 0;
+              document.getElementById("rouboBanco").textContent = rouboBancoValue;
+
+              const infratoresPresosFlagranteValue = cityData.cityData.Produtividade["Nº DE INFRATORES PRESOS EM FLAGRANTE"] ?? 0;
+              document.getElementById("infratoresPresosFlagrante").textContent = infratoresPresosFlagranteValue;
+
+              const infratoresPresosMandatoValue = cityData.cityData.Produtividade["Nº DE INFRATORES PRESOS POR MANDADO"] ?? 0;
+              document.getElementById("infratoresPresosMandato").textContent = infratoresPresosMandatoValue;
+
+              const infratoresApreendidosFlagranteValue = cityData.cityData.Produtividade["Nº DE INFRATORES APREENDIDOS EM FLAGRANTE"] ?? 0;
+              document.getElementById("infratoresApreendidosFlagrante").textContent = infratoresApreendidosFlagranteValue;
+
+              const infratoresApreendidosMandatoValue = cityData.cityData.Produtividade["Nº DE INFRATORES APREENDIDOS POR MANDADO"] ?? 0;
+              document.getElementById("infratoresApreendidosMandato").textContent = infratoresApreendidosMandatoValue;
+
+              const veiculosRecuperadosValue = cityData.cityData.Produtividade["Nº DE VEÍCULOS RECUPERADOS"] ?? 0;
+              document.getElementById("veiculosRecuperados").textContent = veiculosRecuperadosValue;
+
+
+                myChart1.data.datasets[0].data = [homicidioDolosoValue, homicidioCulposoValue, tentativaHomicidioValue, latrocinioValue, homicidioCulposoAcidenteValue, homicidioDolosoAcidenteValue];
+                myChart1.update();
+
+                myChart3.data.datasets[0].data = [estuproValue, estuproVulneravelValue, lesaoCorporalDolosaValue, lesaoCorporalCulposaValue, lesaoCorporalMorteValue];
+                myChart3.update();
+
+                myChart5.data.datasets[0].data = [rouboValue, furtoValue, rouboVeiculovalue, furtoVeiculoValue, extorsaoSequestroValue];
+                myChart5.update();
+
+                myChart7.data.datasets[0].data = [rouboBancoValue, rouboCargaValue];
+                myChart7.update(); 
+
+                myChart9.data.datasets[0].data = [infratoresPresosFlagranteValue, infratoresPresosMandatoValue, infratoresApreendidosFlagranteValue, infratoresApreendidosMandatoValue, veiculosRecuperadosValue];
+                myChart9.update();
+
+                const totalCrimes = parseInt(estuproValue) + parseInt(estuproVulneravelValue) + parseInt(lesaoCorporalDolosaValue) + parseInt(tentativaHomicidioValue) + parseInt(homicidioCulposoAcidenteValue) + parseInt(rouboValue) + parseInt(furtoValue) + parseInt(rouboVeiculovalue) + parseInt(furtoVeiculoValue) + parseInt(rouboCargaValue) + parseInt(homicidioDolosoValue) + parseInt(homicidioCulposoValue) + parseInt(latrocinioValue) + parseInt(homicidioDolosoAcidenteValue) + parseInt(lesaoCorporalCulposaValue) + parseInt(lesaoCorporalMorteValue) + parseInt(rouboBancoValue);
+                console.log(totalCrimes);
+
+                const crimesContraVida = parseInt(homicidioDolosoValue) + parseInt(homicidioCulposoValue) + parseInt(tentativaHomicidioValue) + parseInt(latrocinioValue) + parseInt(homicidioCulposoAcidenteValue) + parseInt(homicidioDolosoAcidenteValue);
+                const crimesContraIntegridade = parseInt(estuproValue) + parseInt(estuproVulneravelValue) + parseInt(lesaoCorporalDolosaValue) + parseInt(lesaoCorporalCulposaValue) + parseInt(lesaoCorporalMorteValue);
+                const crimesContraPatrimonio = parseInt(rouboValue) + parseInt(furtoValue) + parseInt(rouboVeiculovalue) + parseInt(furtoVeiculoValue) + parseInt(extorsaoSequestroValue);
+                const crimesContraPropriedade = parseInt(rouboBancoValue) + parseInt(rouboCargaValue);
                 
-                document.getElementById("homicidioDoloso").textContent = cityData.cityData[2];
-              console.log("Homicidio Doloso:", cityData.cityData[2]);
- 
-              document.getElementById("homicidioCulposo").textContent = cityData.cityData[6];
-              console.log("Homicidio Culposo:", cityData.cityData[6]);
- 
-              document.getElementById("tentativaHomicidio").textContent = cityData.cityData[7];
-              console.log("Tentativa de Homicidio:", cityData.cityData[7]);
- 
-              document.getElementById("nVitimasLatrocinio").textContent = cityData.cityData[13];
-              console.log("Numero de Vitimas de Latrocinio:", cityData.cityData[13]);
- 
-              document.getElementById("homicidioCulposoAcidente").textContent = cityData.cityData[5];
-              console.log("Homicidio Culposo por Acidente:", cityData.cityData[5]);
- 
-              document.getElementById("homicidioDolosoAcidente").textContent = cityData.cityData[3];
-              console.log("Homicidio Doloso por Acidente:", cityData.cityData[3]);
- 
-              document.getElementById("nVitimasHomicidioDolosoAcidente").textContent = cityData.cityData[4];
-              console.log("Numero de Vitimas de Homicidio Doloso por Acidente:", cityData.cityData[4]);
- 
-              document.getElementById("estupro").textContent = cityData.cityData[15];
-              console.log("Estupro:", cityData.cityData[15]);
- 
-              document.getElementById("estuproVulneravel").textContent = cityData.cityData[16];
-              console.log("Estupro Vulneravel:", cityData.cityData[16]);
- 
-              document.getElementById("totalEstupro").textContent = cityData.cityData[14];
-              console.log("Total de Estupro:", cityData.cityData[14]);
- 
-              document.getElementById("lesaoCorporal").textContent = cityData.cityData[9];
-              console.log("Lesao Corporal:", cityData.cityData[9]);
- 
-              document.getElementById("lesaoCorporalCulposa").textContent = cityData.cityData[11];
-              console.log("Lesao Corporal Culposa:", cityData.cityData[11]);
- 
-              document.getElementById("lesaoCorporalMorte").textContent = cityData.cityData[8];
-              console.log("Lesao Corporal com Morte:", cityData.cityData[8]);
- 
-              document.getElementById("furto").textContent = cityData.cityData[22];
-              console.log("Furto:", cityData.cityData[22]);
- 
-              document.getElementById("roubo").textContent = cityData.cityData[18];
-              console.log("Roubo:", cityData.cityData[18]);
- 
-              document.getElementById("rouboVeiculo").textContent = cityData.cityData[19];
-              console.log("Roubo de Veiculo:", cityData.cityData[19]);
- 
-              document.getElementById("furtoVeiculo").textContent = cityData.cityData[19];
-              console.log("Furto de Veiculo:", cityData.cityData[19]);
- 
-              document.getElementById("rouboBanco").textContent = cityData.cityData[20];
-              console.log("Roubo a Banco:", cityData.cityData[20]);
- 
-              document.getElementById("rouboCarga").textContent = cityData.cityData[21];
-              console.log("Roubo de Carga:", cityData.cityData[21]);
- 
-              document.getElementById("latrocinio").textContent = cityData.cityData[12];
-              console.log("Latrocinio:", cityData.cityData[12]);
+                myChart2.data.datasets[0].data = [totalCrimes, crimesContraVida];
+                myChart2.update();
+
+                myChart4.data.datasets[0].data = [totalCrimes, crimesContraIntegridade];
+                myChart4.update();
+
+                myChart6.data.datasets[0].data = [totalCrimes, crimesContraPatrimonio];
+                myChart6.update();
+
+                myChart8.data.datasets[0].data = [totalCrimes, crimesContraPropriedade];
+                myChart8.update();
+                
             })
             .catch(error => {
               console.error('Error fetching city data:', error);
@@ -331,22 +434,28 @@ loadingDiv.style.display = 'none';
         .finally(() => {
 loadingDiv.style.display = 'none';
         });
+
+            
     }
  
     function removeSpecialCharsAndSpaces(str) {
-      str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      str = str.replace(/\s+/g, '_');
-      return str;
-    }
+    str = str.replace(/São/g, 'S')
+                       .replace(/Santa/g, 'S')
+                       .replace(/Santo/g, 'S');
+    str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    str = str.replace(/[^A-Za-z0-9\- ]/g, '');
+    str = str.toUpperCase();
+    return str;
+  }
   });
 
   var data1 = {
     datasets: [{
-      data: [5, 5, 9, 0, 0, 5, 0, 0],
-      backgroundColor: ["#0000CD", "#00FF7F", "#9400D3", "#800000", "#FFD700", "#ADD8E6", "#D2691E", "#228B22"],
+      data: [0, 0, 0, 0, 0, 0],
+      backgroundColor: ["#0000CD", "#00FF7F", "#9400D3", "#800000", "#ADD8E6", "#D2691E", "#228B22"],
       hoverBackgroundColor: ["#6495ED", "#98FB98", "#BA55D3",  "#CD5C5C", "#F0E68C"]
     }],
-    labels: ['Homicídio doloso', 'Homicídio culposo', 'Tentativa de homicídio', 'Latrocínio', 'Número de vítimas de latrocínio', 'Homicídio culposo por acidente de trânsito', 'Homicídio doloso por acidente de trânsito', 'Número de vítimas de homicídio doloso por acidente de trânsito']
+    labels: ['Homicídio doloso', 'Homicídio culposo', 'Tentativa de homicídio', 'Latrocínio', 'Homicídio culposo por acidente de trânsito', 'Homicídio doloso por acidente de trânsito']
   };
   
   var ctx1 = document.getElementById("myChart").getContext("2d");
@@ -370,11 +479,11 @@ loadingDiv.style.display = 'none';
 
   var data2 = {
     datasets: [{
-      data: [2938, 24],
+      data: [0, 0],
       backgroundColor: ["#ccc", "#000"],
       hoverBackgroundColor: ["#6495ED", "#98FB98"]
     }],
-    labels: ['Total de crimes', 'Esse tipo de crime']
+    labels: ['Total de crimes', 'Crimes dessa natureza']
   };
   
   var ctx2 = document.getElementById("myChart2").getContext("2d");
@@ -401,7 +510,7 @@ loadingDiv.style.display = 'none';
 
   var data3 = {
     datasets: [{
-      data: [6, 21, 239, 2, 0],
+      data: [0, 0, 0, 0, 0],
       backgroundColor: ["#0000CD", "#00FF7F", "#9400D3", "#800000", "#D2691E", "#228B22"],
       hoverBackgroundColor: ["#6495ED", "#98FB98", "#BA55D3",  "#CD5C5C"]
     }],
@@ -429,11 +538,11 @@ loadingDiv.style.display = 'none';
 
   var data4 = {
     datasets: [{
-      data: [2938, 268],
+      data: [0, 0],
       backgroundColor: ["#ccc", "#000"],
       hoverBackgroundColor: ["#6495ED", "#98FB98"]
     }],
-    labels: ['Total de crimes', 'Esse tipo de crime']
+    labels: ['Total de crimes', 'Crimes dessa natureza']
   };
   
   var ctx4 = document.getElementById("myChart01").getContext("2d");
@@ -460,11 +569,11 @@ loadingDiv.style.display = 'none';
 
   var data5 = {
     datasets: [{
-      data: [416,1520,47,126],
+      data: [0, 0, 0, 0, 0],
       backgroundColor: ["#0000CD", "#00FF7F","#800000", "#D2691E"],
       hoverBackgroundColor: ["#6495ED", "#98FB98"]
     }],
-    labels: ['roubo','furto','Roubo de veículo', 'Furto de veículo']
+    labels: ['Roubo','Furto','Roubo de veículo', 'Furto de veículo', 'Extorsão mediante sequestro']
   };
   
   var ctx5 = document.getElementById("myChart003").getContext("2d");
@@ -488,11 +597,11 @@ loadingDiv.style.display = 'none';
 
   var data6 = {
     datasets: [{
-      data: [2938, 2109],
+      data: [0, 0],
       backgroundColor: ["#ccc", "#000"],
       hoverBackgroundColor: ["#6495ED", "#98FB98"]
     }],
-    labels: ['Total de crimes', 'Esse tipo de crime']
+    labels: ['Total de crimes', 'Crimes dessa natureza']
   };
   
   var ctx6 = document.getElementById("myChart03").getContext("2d");
@@ -519,7 +628,7 @@ loadingDiv.style.display = 'none';
 
   var data7 = {
     datasets: [{
-      data: [0, 13],
+      data: [0, 0],
       backgroundColor: ["#9400D3", "#800000"],
       hoverBackgroundColor: ["#BA55D3",  "#CD5C5C"]
     }],
@@ -546,11 +655,11 @@ loadingDiv.style.display = 'none';
   });
   var data8 = {
     datasets: [{
-      data: [2938, 13],
+      data: [0, 0],
       backgroundColor: ["#ccc", "#000"],
       hoverBackgroundColor: ["#6495ED", "#98FB98"]
     }],
-    labels: ['Total de crimes', 'Esse tipo de crime']
+    labels: ['Total de crimes', 'Crimes dessa natureza']
   };
   
   var ctx8 = document.getElementById("myChart04").getContext("2d");
@@ -572,6 +681,34 @@ loadingDiv.style.display = 'none';
         }
       },
       cutout: '5%', 
+    }
+  });
+
+  var data9 = {
+    datasets: [{
+      data: [0, 0, 0, 0, 0],
+      backgroundColor: ["#0000CD", "#00FF7F", "#9400D3", "#800000", "#FFD700"],
+      hoverBackgroundColor: ["#6495ED", "#98FB98", "#BA55D3",  "#CD5C5C", "#F0E68C"]
+    }],
+    labels: ['INFRATORES PRESOS EM FLAGRANTE', 'INFRATORES PRESOS POR MANDADO', 'INFRATORES APREENDIDOS EM FLAGRANTE', 'INFRATORES APREENDIDOS POR MANDADO', 'Nº DE VEÍCULOS RECUPERADOS']
+  };
+  
+  var ctx9 = document.getElementById("myChartpdp").getContext("2d");
+  
+  var myChart9 = new Chart(ctx9, {
+    type: 'pie',
+    data: data9,
+    options: {
+      plugins: {
+        legend: {
+          align: 'start',
+          position: 'bottom',
+          labels: {
+            color: 'black',
+          }
+        }
+      },
+      cutout: '70%', 
     }
   });
 </script>
